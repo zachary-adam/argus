@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RiskRankingResponse",
+  "type": "object",
+  "required": ["countries", "confidence"],
+  "additionalProperties": false,
+  "properties": {
+    "countries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["country", "score", "level"],
+        "additionalProperties": false,
+        "properties": {
+          "country": { "type": "string" },
+          "score": { "type": "number", "minimum": 0, "maximum": 100 },
+          "level": { "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] }
+        }
+      }
+    },
+    "confidence": { "enum": ["HIGH", "MODERATE", "LOW"] },
+    "rationale": { "type": "string", "maxLength": 500 }
+  }
+}

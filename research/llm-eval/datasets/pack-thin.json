@@ -1,0 +1,56 @@
+{
+  "id": "pack-thin",
+  "name": "Thin corpus",
+  "mission": "Assess political stability risk for Country X with almost no reporting.",
+  "countryCodes": ["XX"],
+  "watchEntities": ["election", "protest"],
+  "hypotheses": [
+    { "id": "h-unst", "text": "Unrest is escalating toward sustained disruption." },
+    { "id": "h-calm", "text": "The situation remains localized with no systemic break." }
+  ],
+  "events": [
+    {
+      "id": "t1",
+      "source": "rss",
+      "category": "political",
+      "title": "Single protest reported in capital",
+      "summary": "One outlet mentions a daytime demonstration; crowd size unclear.",
+      "lat": 0,
+      "lon": 0,
+      "country": "Unknownland",
+      "countryCode": "XX",
+      "severity": "medium",
+      "timestamp": "2026-06-01T12:00:00Z",
+      "url": "https://example.invalid/t1",
+      "sourceReliability": "D",
+      "sourceCredibility": 4,
+      "corroborationCount": 0
+    },
+    {
+      "id": "t2",
+      "source": "gdelt",
+      "category": "political",
+      "title": "Social post claims larger turnout",
+      "summary": "Unverified social share; may be information-operations adjacent.",
+      "lat": 0.1,
+      "lon": 0.1,
+      "country": "Unknownland",
+      "countryCode": "XX",
+      "severity": "low",
+      "timestamp": "2026-06-01T16:00:00Z",
+      "url": "https://example.invalid/t2",
+      "infoOps": true,
+      "infoOpsReason": "social-media share",
+      "sourceReliability": "F",
+      "sourceCredibility": 5,
+      "corroborationCount": 0
+    }
+  ],
+  "anomalySeries": {
+    "country": "Unknownland",
+    "category": "political",
+    "baselineDailyMean": 1.0,
+    "observedWindowCount": 1,
+    "note": "Not a surge — thin noise"
+  }
+}

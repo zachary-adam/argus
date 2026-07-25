@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AchMatrixResponse",
+  "type": "object",
+  "required": ["cells"],
+  "additionalProperties": false,
+  "properties": {
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["eventId", "hypothesisId", "rating"],
+        "additionalProperties": false,
+        "properties": {
+          "eventId": { "type": "string" },
+          "hypothesisId": { "type": "string" },
+          "rating": { "enum": ["supports", "neutral", "contradicts"] },
+          "rationale": { "type": "string", "maxLength": 200 }
+        }
+      }
+    },
+    "confidence": { "enum": ["HIGH", "MODERATE", "LOW"] }
+  }
+}
