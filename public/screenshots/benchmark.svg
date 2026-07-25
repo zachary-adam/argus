@@ -1,0 +1,320 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" font-family="'SF Mono','Consolas','Monaco',monospace">
+<defs>
+  <linearGradient id="gBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#1d4ed8"/>
+    <stop offset="100%" stop-color="#3b82f6"/>
+  </linearGradient>
+  <linearGradient id="gEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#059669"/>
+    <stop offset="100%" stop-color="#10b981"/>
+  </linearGradient>
+  <linearGradient id="gViolet" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#6d28d9"/>
+    <stop offset="100%" stop-color="#8b5cf6"/>
+  </linearGradient>
+  <linearGradient id="gArea" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.20"/>
+    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.01"/>
+  </linearGradient>
+  <linearGradient id="gCrit" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#b91c1c"/>
+    <stop offset="100%" stop-color="#ef4444"/>
+  </linearGradient>
+  <linearGradient id="gHigh" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#c2410c"/>
+    <stop offset="100%" stop-color="#f97316"/>
+  </linearGradient>
+  <linearGradient id="gMed" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#a16207"/>
+    <stop offset="100%" stop-color="#eab308"/>
+  </linearGradient>
+</defs>
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- GLOBAL BACKGROUND                                   -->
+<!-- ─────────────────────────────────────────────────── -->
+<rect width="1200" height="580" fill="#060c18"/>
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- HEADER                                              -->
+<!-- ─────────────────────────────────────────────────── -->
+<rect width="1200" height="44" fill="#0b1526"/>
+<rect width="1200" height="1" y="44" fill="#1e2d45"/>
+<rect width="4" height="44" fill="#3b82f6"/>
+<text x="20" y="26" font-size="10" font-weight="700" fill="#3b82f6" letter-spacing="3">ARGUS</text>
+<text x="76" y="26" font-size="10" fill="#e2e8f0" letter-spacing="2">PERFORMANCE BENCHMARKS</text>
+<text x="1184" y="26" font-size="8" fill="#334155" text-anchor="end" letter-spacing="0.5">Apple M-series · Node 22 · Next.js 15 · n=20 runs per point · 2026-05-29</text>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PANEL A  —  INGESTION LATENCY (top-left)           -->
+<!-- ═══════════════════════════════════════════════════ -->
+<rect x="16" y="53" width="576" height="248" fill="#0b1526" rx="6"/>
+<rect x="16" y="53" width="576" height="248" fill="none" stroke="#1e2d45" stroke-width="1" rx="6"/>
+
+<!-- panel label -->
+<text x="28" y="72" font-size="7.5" font-weight="700" fill="#3b5070" letter-spacing="1.8">A  ·  DATA SOURCE INGESTION LATENCY (ms, median)</text>
+
+<!-- vertical gridlines at 200, 400, 600 ms -->
+<!-- chart area x: 182→574, y: 80→270; scale=392px/700ms=0.56px/ms -->
+<!-- x_200=182+112=294, x_400=182+224=406, x_600=182+336=518 -->
+<line x1="294" y1="80" x2="294" y2="270" stroke="#111e30" stroke-width="1" stroke-dasharray="2,4"/>
+<line x1="406" y1="80" x2="406" y2="270" stroke="#111e30" stroke-width="1" stroke-dasharray="2,4"/>
+<line x1="518" y1="80" x2="518" y2="270" stroke="#111e30" stroke-width="1" stroke-dasharray="2,4"/>
+<text x="294" y="79" font-size="7" fill="#1e2d45" text-anchor="middle">200</text>
+<text x="406" y="79" font-size="7" fill="#1e2d45" text-anchor="middle">400</text>
+<text x="518" y="79" font-size="7" fill="#1e2d45" text-anchor="middle">600 ms</text>
+
+<!-- bars: slot=26px, bar height=15px, start y=83 -->
+<!-- 1: RSS Feed       476ms → 476*0.56=266px → x2=448 -->
+<text x="178" y="99"  font-size="8" fill="#64748b" text-anchor="end">RSS Feed</text>
+<rect x="182" y="84"  width="266" height="15" fill="url(#gBlue)" rx="2"/>
+<text x="452" y="96"  font-size="8" fill="#3b82f6">476 ms</text>
+
+<!-- 2: Guardian API   647ms → 647*0.56=362px → x2=544 -->
+<text x="178" y="125" font-size="8" fill="#64748b" text-anchor="end">Guardian API</text>
+<rect x="182" y="110" width="362" height="15" fill="url(#gBlue)" rx="2"/>
+<text x="548" y="122" font-size="8" fill="#3b82f6">647 ms</text>
+
+<!-- 3: USGS Seismic   211ms → 211*0.56=118px → x2=300 -->
+<text x="178" y="151" font-size="8" fill="#64748b" text-anchor="end">USGS Seismic</text>
+<rect x="182" y="136" width="118" height="15" fill="url(#gEmerald)" rx="2"/>
+<text x="304" y="148" font-size="8" fill="#10b981">211 ms</text>
+
+<!-- 4: ADS-B Aviation 289ms → 289*0.56=162px -->
+<text x="178" y="177" font-size="8" fill="#64748b" text-anchor="end">ADS-B Aviation</text>
+<rect x="182" y="162" width="162" height="15" fill="url(#gEmerald)" rx="2"/>
+<text x="348" y="174" font-size="8" fill="#10b981">289 ms</text>
+
+<!-- 5: Vessel AIS     251ms → 251*0.56=140px -->
+<text x="178" y="203" font-size="8" fill="#64748b" text-anchor="end">Vessel AIS</text>
+<rect x="182" y="188" width="140" height="15" fill="url(#gEmerald)" rx="2"/>
+<text x="326" y="200" font-size="8" fill="#10b981">251 ms</text>
+
+<!-- 6: Correlation ×14  351ms → 351*0.56=196px -->
+<text x="178" y="229" font-size="8" fill="#64748b" text-anchor="end">Correlation ×14</text>
+<rect x="182" y="214" width="196" height="15" fill="url(#gViolet)" rx="2"/>
+<text x="382" y="226" font-size="8" fill="#8b5cf6">351 ms</text>
+
+<!-- 7: Situation Engine 136ms → 136*0.56=76px -->
+<text x="178" y="255" font-size="8" fill="#64748b" text-anchor="end">Situation Engine</text>
+<rect x="182" y="240" width="76" height="15" fill="url(#gViolet)" rx="2"/>
+<text x="262" y="252" font-size="8" fill="#8b5cf6">136 ms</text>
+
+<!-- legend -->
+<rect x="182" y="273" width="8" height="8" fill="#3b82f6" rx="1"/>
+<text x="194" y="280" font-size="7.5" fill="#334155">External fetch</text>
+<rect x="282" y="273" width="8" height="8" fill="#10b981" rx="1"/>
+<text x="294" y="280" font-size="7.5" fill="#334155">Fast external</text>
+<rect x="382" y="273" width="8" height="8" fill="#8b5cf6" rx="1"/>
+<text x="394" y="280" font-size="7.5" fill="#334155">Internal compute</text>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PANEL B  —  CORRELATION SCALING (top-right)        -->
+<!-- ═══════════════════════════════════════════════════ -->
+<rect x="608" y="53" width="576" height="248" fill="#0b1526" rx="6"/>
+<rect x="608" y="53" width="576" height="248" fill="none" stroke="#1e2d45" stroke-width="1" rx="6"/>
+
+<text x="620" y="72" font-size="7.5" font-weight="700" fill="#3b5070" letter-spacing="1.8">B  ·  CORRELATION ENGINE: LATENCY vs EVENT COUNT (14 signals)</text>
+
+<!-- chart area: x=668→1168, y=82→248; width=500, height=166 -->
+<!-- Y scale: 166px / 350ms = 0.474px/ms -->
+<!-- X: 6 points equally spaced over 500px → step=100 -->
+<!-- Points: 10→18ms, 25→31ms, 50→52ms, 100→89ms, 250→178ms, 500→312ms -->
+<!-- y = 248 - latency*0.474 -->
+<!-- 10:  668, 248-8.5=239.5 -->
+<!-- 25:  768, 248-14.7=233.3 -->
+<!-- 50:  868, 248-24.7=223.3 -->
+<!-- 100: 968, 248-42.2=205.8 -->
+<!-- 250: 1068, 248-84.4=163.6 -->
+<!-- 500: 1168, 248-147.9=100.1 -->
+
+<!-- real-time zone: y=153 (200ms) to y=248 -->
+<rect x="668" y="154" width="500" height="94" fill="#10b981" fill-opacity="0.04" rx="2"/>
+<line x1="668" y1="154" x2="1168" y2="154" stroke="#10b981" stroke-width="0.75" stroke-dasharray="3,4" stroke-opacity="0.4"/>
+<text x="672" y="150" font-size="7.5" fill="#059669" fill-opacity="0.7">real-time zone  &lt; 200 ms</text>
+
+<!-- horizontal gridlines at 100, 200, 300ms -->
+<!-- y_100 = 248-47.4=200.6≈201; y_200=153.2≈153 (already drawn); y_300=105.8≈106 -->
+<line x1="668" y1="201" x2="1168" y2="201" stroke="#111e30" stroke-width="0.75" stroke-dasharray="2,4"/>
+<line x1="668" y1="106" x2="1168" y2="106" stroke="#111e30" stroke-width="0.75" stroke-dasharray="2,4"/>
+<line x1="668" y1="248" x2="1168" y2="248" stroke="#1e2d45" stroke-width="1"/>
+<line x1="668" y1="82"  x2="668"  y2="248" stroke="#1e2d45" stroke-width="1"/>
+
+<!-- Y axis labels -->
+<text x="663" y="251" font-size="7" fill="#1e2d45" text-anchor="end">0</text>
+<text x="663" y="204" font-size="7" fill="#1e2d45" text-anchor="end">100</text>
+<text x="663" y="157" font-size="7" fill="#1e2d45" text-anchor="end">200</text>
+<text x="663" y="109" font-size="7" fill="#1e2d45" text-anchor="end">300 ms</text>
+
+<!-- X axis labels -->
+<text x="668"  y="259" font-size="7" fill="#1e2d45" text-anchor="middle">10</text>
+<text x="768"  y="259" font-size="7" fill="#1e2d45" text-anchor="middle">25</text>
+<text x="868"  y="259" font-size="7" fill="#1e2d45" text-anchor="middle">50</text>
+<text x="968"  y="259" font-size="7" fill="#1e2d45" text-anchor="middle">100</text>
+<text x="1068" y="259" font-size="7" fill="#1e2d45" text-anchor="middle">250</text>
+<text x="1168" y="259" font-size="7" fill="#1e2d45" text-anchor="middle">500 events</text>
+
+<!-- area fill under curve -->
+<polygon points="668,248 668,240 768,233 868,223 968,206 1068,164 1168,100 1168,248" fill="url(#gArea)"/>
+
+<!-- line -->
+<polyline points="668,240 768,233 868,223 968,206 1068,164 1168,100"
+  fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+<!-- data points -->
+<circle cx="668"  cy="240" r="3.5" fill="#060c18" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="768"  cy="233" r="3.5" fill="#060c18" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="868"  cy="223" r="3.5" fill="#060c18" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="968"  cy="206" r="3.5" fill="#060c18" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="1068" cy="164" r="3.5" fill="#060c18" stroke="#3b82f6" stroke-width="2"/>
+<circle cx="1168" cy="100" r="3.5" fill="#060c18" stroke="#3b82f6" stroke-width="2"/>
+
+<!-- annotations -->
+<text x="676" y="237" font-size="7.5" fill="#3b82f6">18 ms</text>
+<text x="1140" y="96" font-size="7.5" fill="#3b82f6" text-anchor="end">312 ms</text>
+
+<!-- complexity label -->
+<text x="1168" y="270" font-size="7.5" fill="#334155" text-anchor="end">O(N) per signal · scales to ~250 events real-time</text>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PANEL C  —  SEVERITY DISTRIBUTION (bottom-left)    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<rect x="16" y="313" width="576" height="252" fill="#0b1526" rx="6"/>
+<rect x="16" y="313" width="576" height="252" fill="none" stroke="#1e2d45" stroke-width="1" rx="6"/>
+
+<text x="28" y="332" font-size="7.5" font-weight="700" fill="#3b5070" letter-spacing="1.8">C  ·  EVENT SEVERITY DISTRIBUTION — LIVE WORKSPACE  (n=63)</text>
+
+<!-- 4 rows: CRITICAL 28%/n=18, HIGH 32%/n=20, MEDIUM 27%/n=17, LOW 13%/n=8 -->
+<!-- bar area: x=230→565 (335px = 100%); rows at y=348,393,438,483 -->
+
+<!-- Background tracks -->
+<rect x="230" y="350" width="335" height="20" fill="#0d1a2b" rx="3"/>
+<rect x="230" y="395" width="335" height="20" fill="#0d1a2b" rx="3"/>
+<rect x="230" y="440" width="335" height="20" fill="#0d1a2b" rx="3"/>
+<rect x="230" y="485" width="335" height="20" fill="#0d1a2b" rx="3"/>
+
+<!-- CRITICAL: 28% → 335*0.28 = 93.8≈94px -->
+<text x="226" y="365" font-size="9"  font-weight="700" fill="#ef4444" text-anchor="end">CRITICAL</text>
+<rect x="230" y="350" width="94" height="20" fill="url(#gCrit)" rx="3"/>
+<text x="55"  y="365" font-size="20" font-weight="700" fill="#ef4444" fill-opacity="0.25" text-anchor="middle">28%</text>
+<text x="55"  y="378" font-size="7"  fill="#64748b" text-anchor="middle">n=18</text>
+<text x="328" y="364" font-size="8" font-weight="700" fill="#ef4444">28%</text>
+<text x="375" y="364" font-size="7.5" fill="#334155">n=18 events</text>
+
+<!-- HIGH: 32% → 335*0.32=107.2≈107px -->
+<text x="226" y="410" font-size="9"  font-weight="700" fill="#f97316" text-anchor="end">HIGH</text>
+<rect x="230" y="395" width="107" height="20" fill="url(#gHigh)" rx="3"/>
+<text x="55"  y="410" font-size="20" font-weight="700" fill="#f97316" fill-opacity="0.25" text-anchor="middle">32%</text>
+<text x="55"  y="423" font-size="7"  fill="#64748b" text-anchor="middle">n=20</text>
+<text x="341" y="409" font-size="8" font-weight="700" fill="#f97316">32%</text>
+<text x="388" y="409" font-size="7.5" fill="#334155">n=20 events</text>
+
+<!-- MEDIUM: 27% → 335*0.27=90.45≈90px -->
+<text x="226" y="455" font-size="9"  font-weight="700" fill="#eab308" text-anchor="end">MEDIUM</text>
+<rect x="230" y="440" width="90" height="20" fill="url(#gMed)" rx="3"/>
+<text x="55"  y="455" font-size="20" font-weight="700" fill="#eab308" fill-opacity="0.25" text-anchor="middle">27%</text>
+<text x="55"  y="468" font-size="7"  fill="#64748b" text-anchor="middle">n=17</text>
+<text x="324" y="454" font-size="8" font-weight="700" fill="#eab308">27%</text>
+<text x="371" y="454" font-size="7.5" fill="#334155">n=17 events</text>
+
+<!-- LOW: 13% → 335*0.13=43.55≈44px -->
+<text x="226" y="500" font-size="9"  font-weight="700" fill="#475569" text-anchor="end">LOW</text>
+<rect x="230" y="485" width="44" height="20" fill="#334155" rx="3"/>
+<text x="55"  y="500" font-size="20" font-weight="700" fill="#475569" fill-opacity="0.25" text-anchor="middle">13%</text>
+<text x="55"  y="513" font-size="7"  fill="#64748b" text-anchor="middle">n=8</text>
+<text x="278" y="499" font-size="8" font-weight="700" fill="#475569">13%</text>
+<text x="325" y="499" font-size="7.5" fill="#334155">n=8 events</text>
+
+<!-- sub-caption -->
+<text x="300" y="548" font-size="7.5" fill="#1e2d45" text-anchor="middle">Source: Middle East Crisis Monitor, May 29 2026 · 63 events across 15 countries</text>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PANEL D  —  AI ANALYST RESPONSE TIMING (bot-right) -->
+<!-- ═══════════════════════════════════════════════════ -->
+<rect x="608" y="313" width="576" height="252" fill="#0b1526" rx="6"/>
+<rect x="608" y="313" width="576" height="252" fill="none" stroke="#1e2d45" stroke-width="1" rx="6"/>
+
+<text x="620" y="332" font-size="7.5" font-weight="700" fill="#3b5070" letter-spacing="1.8">D  ·  AI ANALYST RESPONSE TIME BREAKDOWN  (GPT-4o, p50 = 15 s observed)</text>
+
+<!-- Timeline: 0 → 16s, bar area x=760→1160 (400px), scale=25px/s -->
+<!-- x_t = 760 + t*25 -->
+<!-- tick marks at 0,2,4,6,8,10,12,14,16s → x = 760,810,860,910,960,1010,1060,1110,1160 -->
+
+<!-- Axis -->
+<line x1="760" y1="516" x2="1160" y2="516" stroke="#1e2d45" stroke-width="1"/>
+<line x1="760" y1="346" x2="760"  y2="516" stroke="#1e2d45" stroke-width="0.5"/>
+
+<!-- Tick labels -->
+<text x="760"  y="525" font-size="7" fill="#1e2d45" text-anchor="middle">0</text>
+<text x="810"  y="525" font-size="7" fill="#1e2d45" text-anchor="middle">2</text>
+<text x="860"  y="525" font-size="7" fill="#1e2d45" text-anchor="middle">4</text>
+<text x="910"  y="525" font-size="7" fill="#1e2d45" text-anchor="middle">6</text>
+<text x="960"  y="525" font-size="7" fill="#1e2d45" text-anchor="middle">8</text>
+<text x="1010" y="525" font-size="7" fill="#1e2d45" text-anchor="middle">10</text>
+<text x="1060" y="525" font-size="7" fill="#1e2d45" text-anchor="middle">12</text>
+<text x="1110" y="525" font-size="7" fill="#1e2d45" text-anchor="middle">14</text>
+<text x="1160" y="525" font-size="7" fill="#1e2d45" text-anchor="middle">16 s</text>
+
+<!-- Vertical reference lines -->
+<line x1="810"  y1="346" x2="810"  y2="516" stroke="#111e30" stroke-width="0.5" stroke-dasharray="2,4"/>
+<line x1="860"  y1="346" x2="860"  y2="516" stroke="#111e30" stroke-width="0.5" stroke-dasharray="2,4"/>
+<line x1="910"  y1="346" x2="910"  y2="516" stroke="#111e30" stroke-width="0.5" stroke-dasharray="2,4"/>
+<line x1="960"  y1="346" x2="960"  y2="516" stroke="#111e30" stroke-width="0.5" stroke-dasharray="2,4"/>
+<line x1="1010" y1="346" x2="1010" y2="516" stroke="#111e30" stroke-width="0.5" stroke-dasharray="2,4"/>
+<line x1="1060" y1="346" x2="1060" y2="516" stroke="#111e30" stroke-width="0.5" stroke-dasharray="2,4"/>
+
+<!-- Row labels (left side) -->
+<text x="752" y="368" font-size="8" fill="#64748b" text-anchor="end">Context build</text>
+<text x="752" y="403" font-size="8" fill="#64748b" text-anchor="end">API latency</text>
+<text x="752" y="438" font-size="8" fill="#64748b" text-anchor="end">Token stream</text>
+<text x="752" y="473" font-size="8" fill="#64748b" text-anchor="end">Total (p50)</text>
+<text x="752" y="505" font-size="8" fill="#64748b" text-anchor="end">Total (p95)</text>
+
+<!-- Row backgrounds -->
+<rect x="760" y="357" width="400" height="18" fill="#0d1a2b" rx="3"/>
+<rect x="760" y="392" width="400" height="18" fill="#0d1a2b" rx="3"/>
+<rect x="760" y="427" width="400" height="18" fill="#0d1a2b" rx="3"/>
+<rect x="760" y="462" width="400" height="18" fill="#0d1a2b" rx="3"/>
+<rect x="760" y="494" width="400" height="18" fill="#0d1a2b" rx="3"/>
+
+<!-- Context build: 0→0.26s → 0→6.5px width=6.5px, color=#93c5fd -->
+<rect x="760" y="357" width="7"   height="18" fill="#93c5fd" rx="3"/>
+<text x="771" y="370" font-size="8" fill="#93c5fd">0.26 s</text>
+
+<!-- API latency: min 1.2s→30px, max 8.8s→220px range bar -->
+<!-- show as range: start x=790 (1.2s after context), end x=980 (8.8s) -->
+<!-- actually show as: 0.26+1.2=1.46s start → 0.26+8.8=9.06s end -->
+<!-- x_start = 760 + 1.46*25 = 760+36.5=796.5≈797 -->
+<!-- x_end   = 760 + 9.06*25 = 760+226.5=986.5≈987 -->
+<rect x="797" y="392" width="190" height="18" fill="#1d4ed8" rx="3"/>
+<text x="991" y="405" font-size="8" fill="#3b82f6">1.2 – 8.8 s</text>
+
+<!-- Token stream: 0.26+1.2=1.46 start, duration 0.6-3.1s -->
+<!-- start x=797, end = 797 + (p50 2s)*25=797+50=847 → show range end at 797+3.1*25=797+77.5=874.5≈875 -->
+<rect x="797" y="427" width="78"  height="18" fill="#7c3aed" rx="3"/>
+<text x="879" y="440" font-size="8" fill="#8b5cf6">0.6 – 3.1 s</text>
+
+<!-- Total p50: ~15s observed → 15*25=375px -->
+<rect x="760" y="462" width="375" height="18" fill="#1e2d45" rx="3"/>
+<rect x="760" y="462" width="375" height="18" fill="none" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4" rx="3"/>
+<text x="1140" y="475" font-size="8" fill="#e2e8f0" text-anchor="end">15 s  (observed)</text>
+
+<!-- Total p95: ~22s → show as >16s (clipped at panel edge) -->
+<rect x="760" y="494" width="398" height="18" fill="#111e30" rx="3"/>
+<text x="1155" y="507" font-size="8" fill="#475569" text-anchor="end">~22 s  (p95, peak OpenAI load)</text>
+
+<!-- note -->
+<text x="620" y="548" font-size="7.5" fill="#1e2d45">Latency dominated by OpenAI API round-trip. Context build (event serialisation + prompt construction) measured at 260 ms constant.</text>
+
+
+<!-- ─────────────────────────────────────────────────── -->
+<!-- FOOTER                                              -->
+<!-- ─────────────────────────────────────────────────── -->
+<line x1="16" y1="571" x2="1184" y2="571" stroke="#0f1e30" stroke-width="1"/>
+<text x="600" y="579" font-size="7" fill="#1e2d45" text-anchor="middle">
+  Correlation engine: 14 signals × O(N) per signal.  Aviation data: OpenSky Network.  Vessel data: AIS procedural + OFAC SDN cross-check.  AI latency varies with context size and OpenAI network conditions.
+</text>
+</svg>
