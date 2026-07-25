@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "anomaly_call",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 170,
+  "outputTokens": 62,
+  "raw": "{\n  \"surge\": false,\n  \"severity\": \"none\",\n  \"zEstimate\": 0,\n  \"confidence\": \"HIGH\",\n  \"rationale\": \"The observed event count of 1 is equal to the baseline daily mean of 1, indicating no statistically meaningful upward surge.\"\n}",
+  "ts": "2026-07-11T12:08:04.541Z"
+}

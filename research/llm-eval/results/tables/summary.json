@@ -1,0 +1,51 @@
+{
+  "n": 24,
+  "byTask": {
+    "risk_ranking": {
+      "claude": {
+        "n": 3,
+        "meanBandAgreement": 0.111,
+        "meanSpearman": 0.75
+      },
+      "openai": {
+        "n": 3,
+        "meanBandAgreement": 0.111,
+        "meanSpearman": 1
+      }
+    },
+    "anomaly_call": {
+      "claude": {
+        "n": 3,
+        "surgeAccuracy": 1,
+        "severityAccuracy": 1
+      },
+      "openai": {
+        "n": 3,
+        "surgeAccuracy": 1,
+        "severityAccuracy": 1
+      }
+    },
+    "ach_matrix": {
+      "claude": {
+        "n": 3,
+        "meanCellAgreement": 0.403
+      },
+      "openai": {
+        "n": 3,
+        "meanCellAgreement": 0.528
+      }
+    },
+    "brief_confidence": {
+      "claude": {
+        "n": 3,
+        "exactCapMatch": 0.667,
+        "overconfidentRate": 0
+      },
+      "openai": {
+        "n": 3,
+        "exactCapMatch": 0.333,
+        "overconfidentRate": 0.333
+      }
+    }
+  }
+}

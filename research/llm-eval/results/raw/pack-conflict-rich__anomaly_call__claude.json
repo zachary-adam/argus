@@ -1,0 +1,10 @@
+{
+  "packId": "pack-conflict-rich",
+  "task": "anomaly_call",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 182,
+  "outputTokens": 138,
+  "raw": "```json\n{\n  \"surge\": true,\n  \"severity\": \"strong\",\n  \"zEstimate\": 3.24,\n  \"confidence\": \"HIGH\",\n  \"rationale\": \"Observed count of 18 events represents a 328% increase over baseline daily mean of 4.2. Assuming Poisson distribution with λ=4.2, the z-score is approximately 3.24, indicating a statistically significant anomaly (p<0.001). The magnitude and statistical significance support classification as a strong surge in conflict-related OSINT events for Ukraine.\"\n}\n```",
+  "ts": "2026-07-11T12:20:04.582Z"
+}

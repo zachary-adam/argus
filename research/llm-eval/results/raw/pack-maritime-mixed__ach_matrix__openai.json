@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "ach_matrix",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 487,
+  "outputTokens": 378,
+  "raw": "{\n  \"cells\": [\n    { \"eventId\": \"m1\", \"hypothesisId\": \"h-mar\", \"rating\": \"supports\", \"rationale\": \"The report of naval activity near Odessa indicates a rising maritime threat to commercial shipping.\" },\n    { \"eventId\": \"m1\", \"hypothesisId\": \"h-loc\", \"rating\": \"neutral\", \"rationale\": \"The event does not indicate whether incidents are localized or if there is a corridor-wide disruption.\" },\n    { \"eventId\": \"m2\", \"hypothesisId\": \"h-mar\", \"rating\": \"neutral\", \"rationale\": \"Port congestion does not directly indicate a rising maritime threat.\" },\n    { \"eventId\": \"m2\", \"hypothesisId\": \"h-loc\", \"rating\": \"supports\", \"rationale\": \"The incident is localized to Constanta and does not indicate wider disruption.\" },\n    { \"eventId\": \"m3\", \"hypothesisId\": \"h-mar\", \"rating\": \"supports\", \"rationale\": \"Higher premiums on Black Sea routes suggest a rising maritime threat.\" },\n    { \"eventId\": \"m3\", \"hypothesisId\": \"h-loc\", \"rating\": \"neutral\", \"rationale\": \"The advisory does not specify if incidents are localized or widespread.\" },\n    { \"eventId\": \"m4\", \"hypothesisId\": \"h-mar\", \"rating\": \"supports\", \"rationale\": \"The drone sighting indicates a potential maritime threat.\" },\n    { \"eventId\": \"m4\", \"hypothesisId\": \"h-loc\", \"rating\": \"neutral\", \"rationale\": \"The event does not clarify if the incident is localized or part of a broader issue.\" }\n  ],\n  \"confidence\": \"HIGH\"\n}",
+  "ts": "2026-07-11T12:07:59.231Z"
+}

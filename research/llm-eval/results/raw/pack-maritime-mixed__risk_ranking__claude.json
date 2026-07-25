@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "risk_ranking",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 503,
+  "outputTokens": 261,
+  "raw": "```json\n{\n  \"countries\": [\n    {\n      \"country\": \"Ukraine\",\n      \"score\": 85,\n      \"level\": \"CRITICAL\"\n    },\n    {\n      \"country\": \"Romania\",\n      \"score\": 45,\n      \"level\": \"MEDIUM\"\n    },\n    {\n      \"country\": \"Turkey\",\n      \"score\": 40,\n      \"level\": \"MEDIUM\"\n    }\n  ],\n  \"confidence\": \"MODERATE\",\n  \"rationale\": \"Ukraine faces critical risk from two converging indicators: elevated maritime traffic with interdiction risk near Odessa (critical severity) and an unconfirmed but operationally significant drone sighting near coastal logistics (high severity, analyst-sourced). Combined, these suggest active kinetic or pre-kinetic posturing in Ukrainian waters. Romania and Turkey experience secondary medium-level risk from port congestion and insurance-driven route adjustments, indicating spillover effects on regional commerce but no direct threat indicators. Confidence is moderate due to single-source drone report and lack of confirmed strikes, though the pattern aligns with known Black Sea conflict dynamics.\"\n}\n```",
+  "ts": "2026-07-11T12:20:21.449Z"
+}

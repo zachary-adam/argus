@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "anomaly_call",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 183,
+  "outputTokens": 100,
+  "raw": "```json\n{\n  \"surge\": false,\n  \"severity\": \"none\",\n  \"zEstimate\": 0,\n  \"confidence\": \"HIGH\",\n  \"rationale\": \"Observed event count (1) matches the historical baseline daily mean (1) exactly. No upward deviation from baseline is present. Z-score is 0, indicating the observation falls precisely at the expected mean with no statistical anomaly.\"\n}\n```",
+  "ts": "2026-07-11T12:20:36.744Z"
+}

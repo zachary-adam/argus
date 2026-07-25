@@ -1,0 +1,298 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Encoding & layout ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\setstretch{1.08}
+
+% --- Math & tables ---
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,skip=6pt}
+\usepackage{threeparttable}
+
+% --- Code / URLs ---
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+\usepackage{url}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,columns=fullflexible}
+
+% --- Bib ---
+\usepackage[numbers,sort&compress]{natbib}
+
+\title{\textbf{Auditable Instruments Dominate Language Models\\
+on Calibrated Geopolitical Assessment}}
+\author{
+Zachary Adam\\
+Shama Research / ARGUS\\
+\texttt{https://shamaresearch.com/}
+}
+\date{11 July 2026\\[0.4em]
+\small Preprint v1.2 \quad$\cdot$\quad CC BY 4.0 (text) \quad$\cdot$\quad MIT (code/data)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+If an LLM can draft a geopolitical brief, does it replace the scoring stack behind serious OSINT?
+We show that it does not.
+On three frozen event packs, we evaluate \textbf{Claude Haiku~4.5} and \textbf{GPT-4o-mini}
+(temperature~0, schema-locked JSON) against ARGUS open instruments---absolute country risk,
+rate anomalies, offline Analysis of Competing Hypotheses (ACH), and evidence-balance confidence caps---using identical inputs.
+\textbf{Where assessment requires calibration, instruments dominate.}
+Absolute risk-band agreement collapses to $0.11$ for both models.
+ACH cell agreement remains middling (Claude $0.40$, GPT $0.53$).
+GPT violates confidence caps ($0.33$ overconfident); Claude is more restrained but still imperfect.
+Models look strong only on \emph{easy} axes: anomaly labels ($1.00$) and risk \emph{rank} (GPT $\rho=1$).
+Ordinal fluency is not calibrated assessment.
+Auditable instruments should own bands, ACH cells, and confidence; LLMs may assist triage and prose.
+Replication materials accompany this submission.
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+OSINT evaluation, geopolitical risk, ACH, LLM evaluation, calibration, auditable scoring
+
+%======================================================================
+\section{Introduction}
+%======================================================================
+
+Large language models are increasingly treated as geopolitical analysts: ranking theaters,
+filling ACH matrices, and stating confidence.
+Fluency makes that pitch easy.
+Tradecraft makes it false unless the model matches \emph{inspectable} methods on the axes that
+decide whether a brief is usable.
+
+This paper tests a dominance claim:
+
+\begin{quote}
+\textit{On fixed OSINT packs, ARGUS instruments dominate schema-locked LLMs on calibrated
+assessment tasks (absolute risk bands, ACH cells, confidence caps).
+LLMs match instruments only when the task reduces to following a rate rule or recovering rank order.}
+\end{quote}
+
+We do \textbf{not} claim that instruments equal world ground truth.
+We claim something stronger for \emph{systems}: instruments are \textbf{reproducible authorities}---same inputs, same numbers, no vibe.
+That is the standard LLMs fail here.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item A locked, open replication package (datasets, prompts, schemas, runners, scored outputs).
+  \item Head-to-head results: Claude Haiku~4.5 and GPT-4o-mini versus ARGUS instruments on four tasks $\times$ three packs.
+  \item A task-wise dominance map: instruments win calibration; models win only soft ordinal / numeric-follow tasks.
+\end{enumerate}
+
+%======================================================================
+\section{Related work}
+%======================================================================
+
+\paragraph{Event data and risk scoring.}
+Structured streams such as ACLED~\citep{raleigh2010} and GDELT~\citep{leetaru2013}
+underpin political-risk practice.
+ARGUS implements absolute country risk from severity, fatalities, and related composites
+(\texttt{lib/riskScoring.ts}, \texttt{lib/projectRisk.ts}).
+
+\paragraph{ACH.}
+Heuer's Analysis of Competing Hypotheses~\citep{heuer1999} remains the falsification backbone of analytic tradecraft.
+We use ARGUS offline ACH (\texttt{lib/offlineIntel.ts}) as an auditable matrix---not human gold,
+but a fixed rule baseline LLMs must beat to claim ACH competence.
+
+\paragraph{LLM evaluation and confidence.}
+Prior work stresses schema adherence, calibration, and overconfidence.
+We operationalize those concerns on geopolitical instruments.
+Thin corpora must clamp confidence; ARGUS evidence-balance
+(\texttt{lib/evidenceBalance.ts}) emits an explicit HIGH / MODERATE / LOW cap.
+
+%======================================================================
+\section{Instruments (the authority set)}
+%======================================================================
+
+\begin{table}[t]
+\centering
+\begin{threeparttable}
+\caption{ARGUS instruments used as the reference authority.}
+\label{tab:instruments}
+\begin{tabular}{@{}llp{5.6cm}@{}}
+\toprule
+\textbf{Task} & \textbf{Instrument} & \textbf{Authority output} \\
+\midrule
+Risk ranking & \texttt{projectRisk} & Score $0$--$100$ + CRITICAL / HIGH / MEDIUM / LOW \\
+Anomaly call & \texttt{rateZScore} + thresholds & Surge + none / mild / strong \\
+ACH matrix & \texttt{scoreACHOffline} & supports / neutral / contradicts \\
+Brief confidence & \texttt{assessEvidenceBalance} & \texttt{confidenceCap} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Thresholds were locked \emph{ex ante}. Instruments are the reference; models are the challengers.
+\item Anomaly rule: $z \ge 3$ strong; $1.5 \le z < 3$ mild; else none.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+%======================================================================
+\section{Experimental design}
+%======================================================================
+
+\subsection{Datasets}
+Three frozen synthetic packs (license-clean; no live-API drift) are summarized in Table~\ref{tab:packs}.
+Full JSON packs are in the supplement data directory.
+
+\begin{table}[t]
+\centering
+\caption{Evaluation packs.}
+\label{tab:packs}
+\begin{tabular}{@{}l l c l@{}}
+\toprule
+\textbf{Pack} & \textbf{Character} & \textbf{Events} & \textbf{Instrument anomaly} \\
+\midrule
+\texttt{conflict-rich} & Kinetic-heavy frontier & 8 & $z{=}6.73$ (strong) \\
+\texttt{maritime-mixed} & Maritime + economic mix & 4 & $z{=}1.73$ (mild) \\
+\texttt{thin} & Near-empty political corpus & 2 & $z{=}0$ (none) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Challengers}
+\begin{table}[t]
+\centering
+\caption{Model conditions (temperature $0$; shared prompts and schemas).}
+\label{tab:models}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Arm} & \textbf{Model ID} & \textbf{Effort} \\
+\midrule
+Claude & \texttt{claude-haiku-4-5-20251001} & low \\
+OpenAI & \texttt{gpt-4o-mini} & low \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Shared caps: at most 12 events per prompt; completion limit 800 tokens (2000 for ACH).
+
+\subsection{Metrics (how dominance is scored)}
+\begin{table}[t]
+\centering
+\begin{threeparttable}
+\caption{Win conditions used in the dominance map.}
+\label{tab:metrics}
+\begin{tabular}{@{}p{2.2cm}p{5.2cm}p{5.2cm}@{}}
+\toprule
+\textbf{Task} & \textbf{Model ``wins'' if\ldots} & \textbf{Instrument dominates if\ldots} \\
+\midrule
+Risk bands & High band agreement & Band agreement near zero / systematic inflation \\
+Risk rank & High Spearman $\rho$ & Secondary only (ordinal) \\
+Anomaly & Surge + severity match & Model fails the rate rule \\
+ACH & High cell agreement & Cell agreement far below usable quality \\
+Confidence & Cap match; no overclaim & Overclaim or miss the cap \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+
+%======================================================================
+\section{Results}
+%======================================================================
+
+\subsection{Instrument baselines}
+Deterministic instrument outputs ($\$0$ API) appear in Table~\ref{tab:baselines}.
+
+\begin{table}[t]
+\centering
+\caption{Instrument baselines by pack.}
+\label{tab:baselines}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Pack} & \textbf{Top risk} & \textbf{Evidence cap} & \textbf{Anomaly} \\
+\midrule
+conflict-rich & Ukraine 46 / HIGH & MODERATE / 52 & strong \\
+maritime-mixed & Ukraine 14 / LOW & MODERATE / 63 & mild \\
+thin & Unknownland 1 / LOW & MODERATE / 63 & none \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Dominance table (primary claim)}
+Table~\ref{tab:dominance} is the main empirical claim of the paper.
+
+\begin{table}[t]
+\centering
+\begin{threeparttable}
+\caption{Task-wise dominance map ($n{=}3$ packs per model).}
+\label{tab:dominance}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Axis} & \textbf{Claude} & \textbf{GPT} & \textbf{Winner} \\
+\midrule
+Absolute risk bands (agree) & 0.11 & 0.11 & \textbf{Instrument} \\
+Risk rank $\rho$ & 0.75 & 1.00 & Model (ordinal only) \\
+Anomaly surge / severity & 1.00 / 1.00 & 1.00 / 1.00 & Tie (rate-rule follow) \\
+ACH cell agreement & 0.40 & 0.53 & \textbf{Instrument} \\
+Confidence cap match & 0.67 & 0.33 & \textbf{Instrument} \\
+Overconfidence rate & 0.00 & 0.33 & GPT fails; Claude restrained \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Models do not overturn instruments on any calibrated axis.
+\item High Spearman with ${\sim}11\%$ band agreement is \emph{false competence}: same order, wrong magnitude.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{What failure looks like}
+GPT assigned Ukraine \textbf{CRITICAL / 85} on the maritime pack while the instrument scored
+\textbf{LOW / 14}---same events, different authority.
+ACH cell agreement of $0.40$--$0.53$ means roughly half the falsification matrix disagrees with the offline method.
+GPT stated \textbf{HIGH} confidence on the conflict-rich pack against a \textbf{MODERATE} evidence cap.
+
+%======================================================================
+\section{Discussion}
+%======================================================================
+
+\begin{enumerate}
+  \item \textbf{Bands and ACH define the product.} Briefs live or die on absolute levels and hypothesis cells; instruments own both here.
+  \item \textbf{Anomaly ``wins'' for models are cheap.} Matching $z$-thresholds shows schema following, not analytic superiority.
+  \item \textbf{Rank $\neq$ risk.} High Spearman with weak band agreement is the strongest warning result.
+  \item \textbf{Confidence is the tell.} Even when Claude avoids overclaim, removing the instrument cap is unjustified.
+\end{enumerate}
+
+\noindent\textbf{Systems implication:}
+ARGUS-style stacks should compute scores first and let models narrate second---not the reverse.
+
+%======================================================================
+\section{Limitations}
+%======================================================================
+
+Pilot scale ($n{=}3$ packs); cost-tier models (Haiku / 4o-mini); offline ACH is not human gold;
+synthetic English short-form events only.
+Larger models may narrow gaps; that would be an empirical update, not a reason to skip instruments today.
+
+%======================================================================
+\section{Conclusion}
+%======================================================================
+
+\textbf{Auditable instruments dominate language models on calibrated geopolitical assessment}
+under this protocol.
+Claude and GPT match rate-based anomalies and can recover risk order; they do \textbf{not} match
+absolute bands or ACH cells at usable levels, and GPT overclaims confidence when the corpus looks rich.
+The correct architecture is instrument-authoritative scoring with optional LLM assistance---not
+LLM-authoritative scoring with optional formulas.
+
+\section*{Acknowledgments}
+Built on the open ARGUS codebase (Shama Research).
+No classified or proprietary feeds were used.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "risk_ranking",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 314,
+  "outputTokens": 84,
+  "raw": "{\n  \"countries\": [\n    {\n      \"country\": \"Unknownland\",\n      \"score\": 50,\n      \"level\": \"MEDIUM\"\n    }\n  ],\n  \"confidence\": \"MODERATE\",\n  \"rationale\": \"The presence of a protest indicates potential unrest, but the lack of clarity on crowd size and the unverified nature of social media claims suggest a moderate level of risk.\"\n}",
+  "ts": "2026-07-11T12:08:03.086Z"
+}

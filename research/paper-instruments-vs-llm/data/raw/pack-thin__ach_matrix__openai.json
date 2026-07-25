@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "ach_matrix",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 342,
+  "outputTokens": 218,
+  "raw": "{\n  \"cells\": [\n    {\n      \"eventId\": \"t1\",\n      \"hypothesisId\": \"h-unst\",\n      \"rating\": \"neutral\",\n      \"rationale\": \"The protest is reported but does not indicate escalation or sustained disruption.\"\n    },\n    {\n      \"eventId\": \"t1\",\n      \"hypothesisId\": \"h-calm\",\n      \"rating\": \"supports\",\n      \"rationale\": \"The situation appears localized with only a single protest reported.\"\n    },\n    {\n      \"eventId\": \"t2\",\n      \"hypothesisId\": \"h-unst\",\n      \"rating\": \"neutral\",\n      \"rationale\": \"The claim of larger turnout is unverified and does not confirm escalation.\"\n    },\n    {\n      \"eventId\": \"t2\",\n      \"hypothesisId\": \"h-calm\",\n      \"rating\": \"neutral\",\n      \"rationale\": \"The information is unverified and does not provide evidence of systemic break.\"\n    }\n  ],\n  \"confidence\": \"MODERATE\"\n}",
+  "ts": "2026-07-11T12:08:07.677Z"
+}

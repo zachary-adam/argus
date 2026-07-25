@@ -1,0 +1,20 @@
+Task: brief_confidence
+
+Mission:
+{{mission}}
+
+Watch entities: {{watchEntities}}
+Country codes: {{countryCodes}}
+
+Events (JSON):
+{{events}}
+
+Return JSON:
+{
+  "confidence": "HIGH"|"MODERATE"|"LOW",
+  "scoreEstimate": 0-100,
+  "gaps": [string],
+  "rationale": string
+}
+
+State how complete the evidence is for an assessment of this mission. Prefer LOW when the corpus is thin or one-sided.

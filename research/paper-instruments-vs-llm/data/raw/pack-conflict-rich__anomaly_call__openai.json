@@ -1,0 +1,10 @@
+{
+  "packId": "pack-conflict-rich",
+  "task": "anomaly_call",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 171,
+  "outputTokens": 70,
+  "raw": "{\n  \"surge\": true,\n  \"severity\": \"strong\",\n  \"zEstimate\": 3.5,\n  \"confidence\": \"HIGH\",\n  \"rationale\": \"The observed event count of 18 significantly exceeds the baseline daily mean of 4.2, indicating a strong upward surge in conflict-related events in Ukraine.\"\n}",
+  "ts": "2026-07-11T12:07:32.580Z"
+}

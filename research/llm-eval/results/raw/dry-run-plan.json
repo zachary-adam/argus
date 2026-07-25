@@ -1,0 +1,146 @@
+[
+  {
+    "packId": "pack-conflict-rich",
+    "task": "risk_ranking",
+    "provider": "claude",
+    "promptChars": 2986
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "risk_ranking",
+    "provider": "openai",
+    "promptChars": 2986
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "anomaly_call",
+    "provider": "claude",
+    "promptChars": 649
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "anomaly_call",
+    "provider": "openai",
+    "promptChars": 649
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "ach_matrix",
+    "provider": "claude",
+    "promptChars": 3163
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "ach_matrix",
+    "provider": "openai",
+    "promptChars": 3163
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "brief_confidence",
+    "provider": "claude",
+    "promptChars": 3029
+  },
+  {
+    "packId": "pack-conflict-rich",
+    "task": "brief_confidence",
+    "provider": "openai",
+    "promptChars": 3029
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "risk_ranking",
+    "provider": "claude",
+    "promptChars": 1795
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "risk_ranking",
+    "provider": "openai",
+    "promptChars": 1795
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "anomaly_call",
+    "provider": "claude",
+    "promptChars": 646
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "anomaly_call",
+    "provider": "openai",
+    "promptChars": 646
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "ach_matrix",
+    "provider": "claude",
+    "promptChars": 1891
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "ach_matrix",
+    "provider": "openai",
+    "promptChars": 1891
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "brief_confidence",
+    "provider": "claude",
+    "promptChars": 1837
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "task": "brief_confidence",
+    "provider": "openai",
+    "promptChars": 1837
+  },
+  {
+    "packId": "pack-thin",
+    "task": "risk_ranking",
+    "provider": "claude",
+    "promptChars": 1200
+  },
+  {
+    "packId": "pack-thin",
+    "task": "risk_ranking",
+    "provider": "openai",
+    "promptChars": 1200
+  },
+  {
+    "packId": "pack-thin",
+    "task": "anomaly_call",
+    "provider": "claude",
+    "promptChars": 651
+  },
+  {
+    "packId": "pack-thin",
+    "task": "anomaly_call",
+    "provider": "openai",
+    "promptChars": 651
+  },
+  {
+    "packId": "pack-thin",
+    "task": "ach_matrix",
+    "provider": "claude",
+    "promptChars": 1294
+  },
+  {
+    "packId": "pack-thin",
+    "task": "ach_matrix",
+    "provider": "openai",
+    "promptChars": 1294
+  },
+  {
+    "packId": "pack-thin",
+    "task": "brief_confidence",
+    "provider": "claude",
+    "promptChars": 1227
+  },
+  {
+    "packId": "pack-thin",
+    "task": "brief_confidence",
+    "provider": "openai",
+    "promptChars": 1227
+  }
+]

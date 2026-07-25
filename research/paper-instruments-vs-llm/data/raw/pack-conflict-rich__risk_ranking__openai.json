@@ -1,0 +1,10 @@
+{
+  "packId": "pack-conflict-rich",
+  "task": "risk_ranking",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 749,
+  "outputTokens": 141,
+  "raw": "{\n  \"countries\": [\n    {\n      \"country\": \"Ukraine\",\n      \"score\": 85,\n      \"level\": \"CRITICAL\"\n    },\n    {\n      \"country\": \"Russia\",\n      \"score\": 70,\n      \"level\": \"HIGH\"\n    },\n    {\n      \"country\": \"Switzerland\",\n      \"score\": 10,\n      \"level\": \"LOW\"\n    }\n  ],\n  \"confidence\": \"HIGH\",\n  \"rationale\": \"The events indicate a significant escalation in conflict intensity in Ukraine, with critical artillery exchanges and troop movements. Russia is also affected by cross-border strikes, while Switzerland's low score reflects a lack of active conflict involvement.\"\n}",
+  "ts": "2026-07-11T12:07:30.600Z"
+}

@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "brief_confidence",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 512,
+  "outputTokens": 333,
+  "raw": "```json\n{\n  \"confidence\": \"MODERATE\",\n  \"scoreEstimate\": 62,\n  \"gaps\": [\n    \"No independent corroboration of naval activity near Odessa; single RSS source\",\n    \"Drone sighting lacks confirmation and attribution; analyst-sourced only\",\n    \"No Turkish naval or port incidents reported; limited visibility into TR maritime posture\",\n    \"Absence of kinetic incidents or direct conflict spillover indicators\",\n    \"No timeline or escalation trajectory; snapshot lacks temporal depth\",\n    \"Missing Romanian naval activity; port congestion alone insufficient for security assessment\",\n    \"No casualty or damage reports to validate severity claims\",\n    \"Limited source diversity (RSS, GDELT, single analyst); no official statements or multi-source validation\"\n  ],\n  \"rationale\": \"Four events span the three target countries and maritime watch entities (shipping, port, naval), but evidence quality is uneven. The critical-severity naval activity near Odessa relies on a single RSS feed without corroboration. The drone sighting is analyst-sourced and unconfirmed. Port congestion and transit advisories reflect operational friction rather than security escalation. No kinetic incidents, casualties, or direct conflict spillover are documented. The corpus shows elevated maritime activity and risk perception but lacks the multi-source validation, attribution clarity, and incident confirmation needed for high confidence. Assessment is suitable for situational awareness but insufficient to confirm imminent conflict spillover or validate critical threat posture.\"\n}\n```",
+  "ts": "2026-07-11T12:20:32.422Z"
+}

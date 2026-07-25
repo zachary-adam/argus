@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "risk_ranking",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 346,
+  "outputTokens": 156,
+  "raw": "```json\n{\n  \"countries\": [\n    {\n      \"country\": \"Unknownland\",\n      \"score\": 35,\n      \"level\": \"MEDIUM\"\n    }\n  ],\n  \"confidence\": \"LOW\",\n  \"rationale\": \"Single protest event with unclear crowd size and unverified social amplification. Limited reporting volume and source diversity (one RSS outlet, one GDELT entry) provide insufficient basis for high-confidence assessment. Presence of potential information operations (t2) introduces uncertainty about event authenticity and scale. No fatalities or violence reported. Near-term stability risk appears moderate but heavily constrained by data scarcity and verification gaps.\"\n}\n```",
+  "ts": "2026-07-11T12:20:35.087Z"
+}

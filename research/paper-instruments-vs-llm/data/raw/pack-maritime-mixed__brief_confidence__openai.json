@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "brief_confidence",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 467,
+  "outputTokens": 78,
+  "raw": "{\n  \"confidence\": \"MODERATE\",\n  \"scoreEstimate\": 65,\n  \"gaps\": [\"Limited information on naval activities from Turkey\", \"No recent incidents reported from Romania affecting maritime security\"],\n  \"rationale\": \"While there are critical and high-severity events reported, the overall evidence is somewhat limited and lacks comprehensive coverage across all entities and countries involved.\"\n}",
+  "ts": "2026-07-11T12:08:01.367Z"
+}

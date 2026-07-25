@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnomalyCallResponse",
+  "type": "object",
+  "required": ["surge", "severity", "confidence"],
+  "additionalProperties": false,
+  "properties": {
+    "surge": { "type": "boolean" },
+    "severity": { "enum": ["none", "mild", "strong"] },
+    "zEstimate": { "type": "number" },
+    "confidence": { "enum": ["HIGH", "MODERATE", "LOW"] },
+    "rationale": { "type": "string", "maxLength": 400 }
+  }
+}

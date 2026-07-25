@@ -1,0 +1,17 @@
+Task: anomaly_call
+
+Country: {{country}}
+Category: {{category}}
+Baseline daily mean (historical): {{baselineDailyMean}}
+Observed event count in the evaluation window: {{observedWindowCount}}
+
+Return JSON:
+{
+  "surge": boolean,
+  "severity": "none"|"mild"|"strong",
+  "zEstimate": number,
+  "confidence": "HIGH"|"MODERATE"|"LOW",
+  "rationale": string
+}
+
+Decide whether the observed window is a statistically meaningful upward surge vs the baseline mean.

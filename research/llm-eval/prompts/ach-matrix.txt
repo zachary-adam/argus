@@ -1,0 +1,15 @@
+Task: ach_matrix
+
+Hypotheses (JSON):
+{{hypotheses}}
+
+Events (JSON — use event id as eventId):
+{{events}}
+
+Return JSON:
+{
+  "cells": [{ "eventId": string, "hypothesisId": string, "rating": "supports"|"neutral"|"contradicts", "rationale": string }],
+  "confidence": "HIGH"|"MODERATE"|"LOW"
+}
+
+Emit one cell per (event × hypothesis). Rate only from the provided text.

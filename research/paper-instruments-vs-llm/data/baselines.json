@@ -1,0 +1,378 @@
+[
+  {
+    "packId": "pack-conflict-rich",
+    "packName": "Conflict-rich theater",
+    "instrument": "argus-v1",
+    "risk": [
+      {
+        "country": "Ukraine",
+        "countryCode": "UA",
+        "score": 46,
+        "level": "HIGH",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 6,
+        "criticalCount": 2,
+        "fatalities": 20,
+        "topEvent": "Artillery exchange intensifies near eastern sector",
+        "velocityScore": 50,
+        "severityScore": 47,
+        "fatalityScore": 44
+      },
+      {
+        "country": "Russia",
+        "countryCode": "RU",
+        "score": 11,
+        "level": "LOW",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 1,
+        "criticalCount": 0,
+        "fatalities": 7,
+        "topEvent": "",
+        "velocityScore": 50,
+        "severityScore": 3,
+        "fatalityScore": 30
+      },
+      {
+        "country": "Switzerland",
+        "countryCode": "CH",
+        "score": 1,
+        "level": "LOW",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 1,
+        "criticalCount": 0,
+        "fatalities": 0,
+        "topEvent": "",
+        "velocityScore": 50,
+        "severityScore": 2,
+        "fatalityScore": 0
+      }
+    ],
+    "evidenceBalance": {
+      "score": 52,
+      "confidenceCap": "MODERATE",
+      "gapTypes": [
+        "volume",
+        "country",
+        "language"
+      ],
+      "gapCount": 3
+    },
+    "ach": {
+      "cellCount": 24,
+      "supports": 10,
+      "contradicts": 7,
+      "neutral": 7,
+      "cells": [
+        {
+          "eventId": "e1",
+          "hypothesisId": "h-esc",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e1",
+          "hypothesisId": "h-stal",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e1",
+          "hypothesisId": "h-dip",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e2",
+          "hypothesisId": "h-esc",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e2",
+          "hypothesisId": "h-stal",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e2",
+          "hypothesisId": "h-dip",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e3",
+          "hypothesisId": "h-esc",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "e3",
+          "hypothesisId": "h-stal",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "e3",
+          "hypothesisId": "h-dip",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "e4",
+          "hypothesisId": "h-esc",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e4",
+          "hypothesisId": "h-stal",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e4",
+          "hypothesisId": "h-dip",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e5",
+          "hypothesisId": "h-esc",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e5",
+          "hypothesisId": "h-stal",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e5",
+          "hypothesisId": "h-dip",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e6",
+          "hypothesisId": "h-esc",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e6",
+          "hypothesisId": "h-stal",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e6",
+          "hypothesisId": "h-dip",
+          "rating": "supports"
+        },
+        {
+          "eventId": "e7",
+          "hypothesisId": "h-esc",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e7",
+          "hypothesisId": "h-stal",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "e7",
+          "hypothesisId": "h-dip",
+          "rating": "contradicts"
+        },
+        {
+          "eventId": "e8",
+          "hypothesisId": "h-esc",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "e8",
+          "hypothesisId": "h-stal",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "e8",
+          "hypothesisId": "h-dip",
+          "rating": "neutral"
+        }
+      ]
+    },
+    "anomaly": {
+      "z": 6.734,
+      "surge": true,
+      "severity": "strong",
+      "note": "Elevated vs baseline — instrument should flag upward surge"
+    }
+  },
+  {
+    "packId": "pack-maritime-mixed",
+    "packName": "Maritime / mixed signals",
+    "instrument": "argus-v1",
+    "risk": [
+      {
+        "country": "Ukraine",
+        "countryCode": "UA",
+        "score": 14,
+        "level": "LOW",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 2,
+        "criticalCount": 1,
+        "fatalities": 0,
+        "topEvent": "Naval activity reported near Odessa approaches",
+        "velocityScore": 50,
+        "severityScore": 20,
+        "fatalityScore": 0
+      },
+      {
+        "country": "Romania",
+        "countryCode": "RO",
+        "score": 3,
+        "level": "LOW",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 1,
+        "criticalCount": 0,
+        "fatalities": 0,
+        "topEvent": "",
+        "velocityScore": 50,
+        "severityScore": 4,
+        "fatalityScore": 0
+      },
+      {
+        "country": "Turkey",
+        "countryCode": "TR",
+        "score": 3,
+        "level": "LOW",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 1,
+        "criticalCount": 0,
+        "fatalities": 0,
+        "topEvent": "",
+        "velocityScore": 50,
+        "severityScore": 4,
+        "fatalityScore": 0
+      }
+    ],
+    "evidenceBalance": {
+      "score": 63,
+      "confidenceCap": "MODERATE",
+      "gapTypes": [
+        "volume",
+        "entity"
+      ],
+      "gapCount": 2
+    },
+    "ach": {
+      "cellCount": 8,
+      "supports": 0,
+      "contradicts": 1,
+      "neutral": 7,
+      "cells": [
+        {
+          "eventId": "m1",
+          "hypothesisId": "h-mar",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m1",
+          "hypothesisId": "h-loc",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m2",
+          "hypothesisId": "h-mar",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m2",
+          "hypothesisId": "h-loc",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m3",
+          "hypothesisId": "h-mar",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m3",
+          "hypothesisId": "h-loc",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m4",
+          "hypothesisId": "h-mar",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "m4",
+          "hypothesisId": "h-loc",
+          "rating": "contradicts"
+        }
+      ]
+    },
+    "anomaly": {
+      "z": 1.732,
+      "surge": true,
+      "severity": "mild",
+      "note": "Mild elevation — borderline"
+    }
+  },
+  {
+    "packId": "pack-thin",
+    "packName": "Thin corpus",
+    "instrument": "argus-v1",
+    "risk": [
+      {
+        "country": "Unknownland",
+        "countryCode": "XX",
+        "score": 1,
+        "level": "LOW",
+        "trend": "stable",
+        "trendPct": 0,
+        "eventCount": 1,
+        "criticalCount": 0,
+        "fatalities": 0,
+        "topEvent": "",
+        "velocityScore": 50,
+        "severityScore": 1,
+        "fatalityScore": 0
+      }
+    ],
+    "evidenceBalance": {
+      "score": 63,
+      "confidenceCap": "MODERATE",
+      "gapTypes": [
+        "volume",
+        "entity"
+      ],
+      "gapCount": 2
+    },
+    "ach": {
+      "cellCount": 4,
+      "supports": 0,
+      "contradicts": 0,
+      "neutral": 4,
+      "cells": [
+        {
+          "eventId": "t1",
+          "hypothesisId": "h-unst",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "t1",
+          "hypothesisId": "h-calm",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "t2",
+          "hypothesisId": "h-unst",
+          "rating": "neutral"
+        },
+        {
+          "eventId": "t2",
+          "hypothesisId": "h-calm",
+          "rating": "neutral"
+        }
+      ]
+    },
+    "anomaly": {
+      "z": 0,
+      "surge": false,
+      "severity": "none",
+      "note": "Not a surge — thin noise"
+    }
+  }
+]

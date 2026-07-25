@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BriefConfidenceResponse",
+  "type": "object",
+  "required": ["confidence", "scoreEstimate"],
+  "additionalProperties": false,
+  "properties": {
+    "confidence": { "enum": ["HIGH", "MODERATE", "LOW"] },
+    "scoreEstimate": { "type": "number", "minimum": 0, "maximum": 100 },
+    "gaps": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 8
+    },
+    "rationale": { "type": "string", "maxLength": 400 }
+  }
+}

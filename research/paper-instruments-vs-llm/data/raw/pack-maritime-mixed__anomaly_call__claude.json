@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "anomaly_call",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 180,
+  "outputTokens": 166,
+  "raw": "```json\n{\n  \"surge\": true,\n  \"severity\": \"mild\",\n  \"zEstimate\": 1.22,\n  \"confidence\": \"MODERATE\",\n  \"rationale\": \"Observed count of 6 events represents a 100% increase over the historical baseline mean of 3. Assuming Poisson distribution with λ=3, this yields a z-score of approximately 1.22, corresponding to a one-tailed p-value around 0.11. While the directional trend is clear and the doubling is notable, the statistical significance is moderate rather than strong due to the small absolute counts and typical variance in conflict-related event reporting. Classified as mild severity surge with moderate confidence.\"\n}\n```",
+  "ts": "2026-07-11T12:20:23.652Z"
+}

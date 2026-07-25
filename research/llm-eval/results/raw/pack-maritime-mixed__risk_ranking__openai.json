@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "risk_ranking",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 459,
+  "outputTokens": 126,
+  "raw": "{\n  \"countries\": [\n    { \"country\": \"Ukraine\", \"score\": 85, \"level\": \"CRITICAL\" },\n    { \"country\": \"Romania\", \"score\": 50, \"level\": \"MEDIUM\" },\n    { \"country\": \"Turkey\", \"score\": 50, \"level\": \"MEDIUM\" }\n  ],\n  \"confidence\": \"HIGH\",\n  \"rationale\": \"The critical naval activity near Odessa indicates a significant risk for Ukraine, while medium-level risks from port congestion in Romania and updated transit advisories for Turkey suggest ongoing concerns but less immediate threat.\"\n}",
+  "ts": "2026-07-11T12:07:51.581Z"
+}

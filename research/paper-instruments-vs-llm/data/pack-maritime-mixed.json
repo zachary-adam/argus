@@ -1,0 +1,88 @@
+{
+  "id": "pack-maritime-mixed",
+  "name": "Maritime / mixed signals",
+  "mission": "Watch Black Sea approaches for maritime security and conflict spillover.",
+  "countryCodes": ["UA", "RO", "TR"],
+  "watchEntities": ["shipping", "port", "naval"],
+  "hypotheses": [
+    { "id": "h-mar", "text": "Maritime threat to commercial shipping is rising." },
+    { "id": "h-loc", "text": "Incidents remain localized without corridor-wide disruption." }
+  ],
+  "events": [
+    {
+      "id": "m1",
+      "source": "rss",
+      "category": "conflict",
+      "title": "Naval activity reported near Odessa approaches",
+      "summary": "Security notices cite elevated maritime traffic and possible interdiction risk.",
+      "lat": 46.4,
+      "lon": 30.7,
+      "country": "Ukraine",
+      "countryCode": "UA",
+      "severity": "critical",
+      "timestamp": "2026-06-03T08:00:00Z",
+      "url": "https://example.invalid/m1",
+      "sourceReliability": "B",
+      "sourceCredibility": 2,
+      "corroborationCount": 2
+    },
+    {
+      "id": "m2",
+      "source": "gdelt",
+      "category": "economic",
+      "title": "Port congestion at Constanta",
+      "summary": "Screening delays grain corridor traffic; no kinetic incident at berth.",
+      "lat": 44.16,
+      "lon": 28.63,
+      "country": "Romania",
+      "countryCode": "RO",
+      "severity": "medium",
+      "timestamp": "2026-06-03T11:00:00Z",
+      "url": "https://example.invalid/m2",
+      "sourceReliability": "A",
+      "sourceCredibility": 2,
+      "corroborationCount": 1
+    },
+    {
+      "id": "m3",
+      "source": "rss",
+      "category": "political",
+      "title": "Transit advisories updated for commercial vessels",
+      "summary": "Insurers note higher premiums on selected Black Sea routes.",
+      "lat": 41.0,
+      "lon": 29.0,
+      "country": "Turkey",
+      "countryCode": "TR",
+      "severity": "medium",
+      "timestamp": "2026-06-03T14:00:00Z",
+      "url": "https://example.invalid/m3",
+      "sourceReliability": "B",
+      "sourceCredibility": 2,
+      "corroborationCount": 2
+    },
+    {
+      "id": "m4",
+      "source": "analyst",
+      "category": "conflict",
+      "title": "Drone sighting near coastal logistics node",
+      "summary": "Single-source report; readiness posture without confirmed strike.",
+      "lat": 46.6,
+      "lon": 31.0,
+      "country": "Ukraine",
+      "countryCode": "UA",
+      "severity": "high",
+      "timestamp": "2026-06-03T17:00:00Z",
+      "url": "https://example.invalid/m4",
+      "sourceReliability": "C",
+      "sourceCredibility": 3,
+      "corroborationCount": 1
+    }
+  ],
+  "anomalySeries": {
+    "country": "Ukraine",
+    "category": "conflict",
+    "baselineDailyMean": 3.0,
+    "observedWindowCount": 6,
+    "note": "Mild elevation — borderline"
+  }
+}

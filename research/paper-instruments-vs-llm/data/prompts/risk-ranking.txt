@@ -1,0 +1,16 @@
+Task: risk_ranking
+
+Mission:
+{{mission}}
+
+Events (JSON):
+{{events}}
+
+Return JSON matching this schema:
+{
+  "countries": [{ "country": string, "score": 0-100, "level": "CRITICAL"|"HIGH"|"MEDIUM"|"LOW" }],
+  "confidence": "HIGH"|"MODERATE"|"LOW",
+  "rationale": string
+}
+
+Score absolute near-term risk from the events only. Rank all countries that appear.

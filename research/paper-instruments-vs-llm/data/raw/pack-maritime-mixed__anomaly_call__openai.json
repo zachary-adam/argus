@@ -1,0 +1,10 @@
+{
+  "packId": "pack-maritime-mixed",
+  "task": "anomaly_call",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 169,
+  "outputTokens": 75,
+  "raw": "{\n  \"surge\": true,\n  \"severity\": \"mild\",\n  \"zEstimate\": 1.5,\n  \"confidence\": \"MODERATE\",\n  \"rationale\": \"The observed event count of 6 exceeds the baseline daily mean of 3, indicating a potential upward surge, but the zEstimate suggests it is not highly significant.\"\n}",
+  "ts": "2026-07-11T12:07:53.386Z"
+}

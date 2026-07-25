@@ -1,0 +1,10 @@
+{
+  "packId": "pack-conflict-rich",
+  "task": "brief_confidence",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 837,
+  "outputTokens": 380,
+  "raw": "```json\n{\n  \"confidence\": \"MODERATE\",\n  \"scoreEstimate\": 72,\n  \"gaps\": [\n    \"No Russian casualty or damage assessment data; reliance on conflicting toll figures\",\n    \"Limited Russian-sourced events (only 1 of 8); asymmetric coverage favors Ukrainian perspective\",\n    \"No explicit Russian military response or counter-movement reporting\",\n    \"Absence of NATO/Western military intelligence corroboration on troop movements\",\n    \"No quantified artillery volume or rate-of-fire comparisons to establish intensity baseline\",\n    \"Diplomatic context thin; only one statement on ceasefire talks, no negotiation signals\",\n    \"Civilian impact data incomplete; displacement figures lack specificity and verification\",\n    \"Timeline compressed to 48 hours; insufficient data for trend validation\"\n  ],\n  \"rationale\": \"Evidence supports elevated near-term conflict intensity with sustained artillery exchanges, drone operations, and troop reinforcement activity. Three critical-severity events and multiple high-severity incidents across 48 hours indicate active escalation. However, confidence is moderated by significant asymmetries: 7 of 8 events originate from Ukrainian or third-party sources; Russian perspective limited to one cross-border strike claim with unverified casualty range (3–11). Absence of Russian military statements, counter-movements, or independent verification of Ukrainian troop positioning weakens bidirectional escalation assessment. Diplomatic vacuum (no scheduled talks) and displacement surge suggest conflict momentum, but short observation window and lack of historical baseline prevent robust trend projection. Assessment is sufficient for tactical situational awareness but insufficient for strategic escalation forecasting without Russian-side corroboration.\"\n}\n```",
+  "ts": "2026-07-11T12:20:18.530Z"
+}

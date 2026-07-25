@@ -1,0 +1,122 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible}
+
+\title{\textbf{Supplementary Material}\\[0.4em]
+\large Auditable Instruments Dominate Language Models\\
+on Calibrated Geopolitical Assessment}
+\author{Zachary Adam \quad$\cdot$\quad Shama Research / ARGUS}
+\date{11 July 2026}
+
+\begin{document}
+\maketitle
+
+\noindent This supplement accompanies the main paper.
+Machine-readable files live under \texttt{data/} in this package.
+
+\tableofcontents
+\vspace{1em}
+
+%----------------------------------------------------------------------
+\section{Replication commands}
+%----------------------------------------------------------------------
+From the ARGUS repository root:
+
+\begin{lstlisting}
+npm run eval:baselines
+npm run eval:llm -- --provider openai
+npm run eval:llm -- --provider claude
+npm run eval:score
+\end{lstlisting}
+
+Frozen copies of outputs used for the preprint tables are in \texttt{data/}.
+
+%----------------------------------------------------------------------
+\section{Protocol and decisions}
+%----------------------------------------------------------------------
+Locked protocol and decision log are included as Markdown:
+
+\begin{itemize}
+  \item \texttt{supplement/PROTOCOL.md}
+  \item \texttt{supplement/DECISIONS.md}
+\end{itemize}
+
+Summary of locked choices: Claude Haiku~4.5 + GPT-4o-mini; synthetic packs; skip human ACH gold for v1; arXiv + site note; low API spend.
+
+%----------------------------------------------------------------------
+\section{Per-pack scored metrics}
+%----------------------------------------------------------------------
+Table~\ref{tab:perpack} expands the aggregate dominance table.
+
+\begin{center}
+\begin{longtable}{@{}lllll@{}}
+\caption{Per-pack metrics (parse-OK rows only).}\label{tab:perpack}\\
+\toprule
+\textbf{Provider} & \textbf{Pack} & \textbf{Task} & \textbf{Key metric} & \textbf{Value} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Provider} & \textbf{Pack} & \textbf{Task} & \textbf{Key metric} & \textbf{Value} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+Claude & conflict-rich & risk\_ranking & band / $\rho$ & 0.33 / 1.00 \\
+Claude & maritime-mixed & risk\_ranking & band / $\rho$ & 0.00 / 0.50 \\
+Claude & thin & risk\_ranking & band / $\rho$ & 0.00 / --- \\
+Claude & conflict-rich & anomaly & surge+sev & true \\
+Claude & maritime-mixed & anomaly & surge+sev & true \\
+Claude & thin & anomaly & surge+sev & true \\
+Claude & conflict-rich & ACH & cell agree & 0.333 \\
+Claude & maritime-mixed & ACH & cell agree & 0.125 \\
+Claude & thin & ACH & cell agree & 0.750 \\
+Claude & conflict-rich & confidence & model vs cap & MODERATE = MODERATE \\
+Claude & maritime-mixed & confidence & model vs cap & MODERATE = MODERATE \\
+Claude & thin & confidence & model vs cap & LOW vs MODERATE \\
+GPT & conflict-rich & risk\_ranking & band / $\rho$ & 0.33 / 1.00 \\
+GPT & maritime-mixed & risk\_ranking & band / $\rho$ & 0.00 / 1.00 \\
+GPT & thin & risk\_ranking & band / $\rho$ & 0.00 / --- \\
+GPT & conflict-rich & anomaly & surge+sev & true \\
+GPT & maritime-mixed & anomaly & surge+sev & true \\
+GPT & thin & anomaly & surge+sev & true \\
+GPT & conflict-rich & ACH & cell agree & 0.458 \\
+GPT & maritime-mixed & ACH & cell agree & 0.375 \\
+GPT & thin & ACH & cell agree & 0.750 \\
+GPT & conflict-rich & confidence & model vs cap & HIGH vs MODERATE \\
+GPT & maritime-mixed & confidence & model vs cap & MODERATE = MODERATE \\
+GPT & thin & confidence & model vs cap & LOW vs MODERATE \\
+\end{longtable}
+\end{center}
+
+%----------------------------------------------------------------------
+\section{Package file map}
+%----------------------------------------------------------------------
+\begin{itemize}
+  \item \texttt{main.tex} / \texttt{main.pdf} --- main paper
+  \item \texttt{supplement.tex} / \texttt{supplement.pdf} --- this document
+  \item \texttt{refs.bib} --- bibliography
+  \item \texttt{data/pack-*.json} --- frozen event packs
+  \item \texttt{data/baselines.json}, \texttt{scored.json}, \texttt{summary.json}
+  \item \texttt{data/raw/} --- raw model JSON responses
+  \item \texttt{data/prompts/} --- system + task prompts
+  \item \texttt{data/*-ranking.json} etc.\ --- JSON schemas
+\end{itemize}
+
+%----------------------------------------------------------------------
+\section{License}
+%----------------------------------------------------------------------
+Text: CC BY 4.0.
+Code and evaluation data in this package: MIT (as in the ARGUS repository), unless a file states otherwise.
+Do not redistribute API keys.
+
+\end{document}

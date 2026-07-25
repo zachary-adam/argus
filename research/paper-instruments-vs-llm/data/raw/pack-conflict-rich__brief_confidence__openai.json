@@ -1,0 +1,10 @@
+{
+  "packId": "pack-conflict-rich",
+  "task": "brief_confidence",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 757,
+  "outputTokens": 68,
+  "raw": "{\n  \"confidence\": \"HIGH\",\n  \"scoreEstimate\": 85,\n  \"gaps\": [],\n  \"rationale\": \"The events indicate significant military activity and escalation risks, particularly with critical artillery exchanges and troop movements in Ukraine. The presence of multiple high-severity incidents supports a strong assessment of near-term conflict intensity.\"\n}",
+  "ts": "2026-07-11T12:07:47.885Z"
+}

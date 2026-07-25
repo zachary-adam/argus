@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "brief_confidence",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 348,
+  "outputTokens": 290,
+  "raw": "```json\n{\n  \"confidence\": \"LOW\",\n  \"scoreEstimate\": 35,\n  \"gaps\": [\n    \"Single RSS source for primary event; no corroboration from independent outlets\",\n    \"Crowd size unverified; no quantitative data on protest scale\",\n    \"Social media claim flagged as potential infoOps; reliability unknown\",\n    \"No reporting on government response, security posture, or institutional stability\",\n    \"No election-related events despite watch list inclusion\",\n    \"Temporal gap and limited duration of observation (4 hours)\",\n    \"No baseline data on typical protest frequency or political volatility for Country X\",\n    \"Country name mismatch ('Unknownland' vs 'XX') suggests data quality issues\"\n  ],\n  \"rationale\": \"Assessment is severely constrained by minimal reporting volume and low source diversity. Two events over a 4-hour window provide insufficient basis for political stability conclusions. The primary event lacks crowd estimates and independent verification; the secondary event is flagged as potentially manipulated. No election activity detected despite explicit watch criteria. Without historical context, comparative data, or institutional reporting, confidence in any stability judgment is low. This corpus is consistent with either genuine reporting scarcity or information environment opacity, both of which elevate uncertainty.\"\n}\n```",
+  "ts": "2026-07-11T12:20:44.080Z"
+}

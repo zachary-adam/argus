@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "ach_matrix",
+  "provider": "claude",
+  "model": "claude-haiku-4-5-20251001",
+  "inputTokens": 381,
+  "outputTokens": 329,
+  "raw": "```json\n{\n  \"cells\": [\n    {\n      \"eventId\": \"t1\",\n      \"hypothesisId\": \"h-unst\",\n      \"rating\": \"neutral\",\n      \"rationale\": \"Single protest report with unclear crowd size provides insufficient evidence of escalation toward sustained disruption; localized event alone does not confirm systemic trend.\"\n    },\n    {\n      \"eventId\": \"t1\",\n      \"hypothesisId\": \"h-calm\",\n      \"rating\": \"supports\",\n      \"rationale\": \"One reported demonstration in capital is consistent with a localized event without systemic break; limited scope aligns with containment narrative.\"\n    },\n    {\n      \"eventId\": \"t2\",\n      \"hypothesisId\": \"h-unst\",\n      \"rating\": \"neutral\",\n      \"rationale\": \"Unverified social claim of larger turnout is flagged as potentially infoOps-adjacent; unreliable sourcing prevents meaningful assessment of escalation.\"\n    },\n    {\n      \"eventId\": \"t2\",\n      \"hypothesisId\": \"h-calm\",\n      \"rating\": \"neutral\",\n      \"rationale\": \"Unverified social post with infoOps indicators does not reliably demonstrate systemic break; information quality too low to confirm or contradict localization thesis.\"\n    }\n  ],\n  \"confidence\": \"LOW\"\n}\n```",
+  "ts": "2026-07-11T12:20:39.737Z"
+}

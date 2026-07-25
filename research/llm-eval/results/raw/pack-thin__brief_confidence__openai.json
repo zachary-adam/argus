@@ -1,0 +1,10 @@
+{
+  "packId": "pack-thin",
+  "task": "brief_confidence",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "inputTokens": 317,
+  "outputTokens": 79,
+  "raw": "{\n  \"confidence\": \"LOW\",\n  \"scoreEstimate\": 30,\n  \"gaps\": [\"Limited reporting on political events in Country X\", \"Unverified social media claims\", \"Only one protest reported\"],\n  \"rationale\": \"The evidence is thin with only a single protest reported and unverified social media claims, indicating a lack of comprehensive information to assess political stability.\"\n}",
+  "ts": "2026-07-11T12:08:09.486Z"
+}
