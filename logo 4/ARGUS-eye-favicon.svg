@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-150 -150 300 300" width="256" height="256">
+  <title>ARGUS</title>
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M -134 0 Q 0 -116 134 0 Q 0 116 -134 0 Z" stroke="#F6F7ED" stroke-width="9"></path>
+    <g stroke="#F6F7ED" stroke-width="7">
+      <line x1="60.00" y1="0.00" x2="0" y2="0"></line>
+      <line x1="30.00" y1="51.96" x2="0" y2="0"></line>
+      <line x1="-30.00" y1="51.96" x2="0" y2="0"></line>
+      <line x1="-60.00" y1="0.00" x2="0" y2="0"></line>
+      <line x1="-30.00" y1="-51.96" x2="0" y2="0"></line>
+      <line x1="30.00" y1="-51.96" x2="0" y2="0"></line>
+    </g>
+    <circle cx="0" cy="0" r="22" fill="#DBE64C"></circle>
+  </g>
+</svg>

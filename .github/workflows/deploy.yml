@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # allow manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+    needs: []  # runs independently of CI — Railway builds from source anyway
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy
+        run: railway up --service argus --detach
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # ── How to set this up ──────────────────────────────────────────────────────
+  # 1. Create a Railway project at railway.app
+  # 2. Add a service, connect this GitHub repo
+  # 3. Add a Volume mounted at /app/.argus (persists the SQLite DB)
+  # 4. Set all env vars in Railway dashboard (copy from .env.example)
+  # 5. In GitHub repo settings → Secrets → add RAILWAY_TOKEN
+  #    (get it from railway.app → Account Settings → Tokens)
+  # 6. Push to main — this workflow deploys automatically
+  # ───────────────────────────────────────────────────────────────────────────
