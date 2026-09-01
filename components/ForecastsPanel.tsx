@@ -46,14 +46,16 @@ export default function ForecastsPanel() {
             <div className="ui-kicker" style={{ marginBottom: 4 }}>Tracking</div>
             <div className="ui-title ui-title--panel">Forecasts</div>
             <p className="ui-subtitle ui-subtitle--panel" style={{ marginTop: 6 }}>
-              Your probabilistic claims — synced with this project.{' '}
+              Make a dated call with a % chance (&ldquo;70% by Nov 30&rdquo;), then mark whether
+              it happened. Your accuracy is scored over time — lower <em>Brier</em> is better.
+              Scored formula &amp; ACH cards live in the{' '}
               <button type="button" className="ui-link" onClick={() => {
                 handleClose()
                 useMapStore.getState().togglePanel('ledger')
               }}>
                 Ledger
               </button>
-              {' '}tracks formula & ACH scores from canvas.
+              .
             </p>
             <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
               <span className="ui-chip ui-chip--xs">{forecasts.length} logged</span>
@@ -245,8 +247,8 @@ export default function ForecastsPanel() {
 
         {forecasts.length === 0 && (
           <div className="ui-panel-empty">
-            <div className="ui-panel-empty__title">No forecasts logged</div>
-            <p className="ui-feed-hint">Log a claim and a due date. Resolve it when you know what happened.</p>
+            <div className="ui-panel-empty__title">Log your first forecast</div>
+            <p className="ui-feed-hint">Write a dated call with a % chance above, then resolve it when you know what happened. Your accuracy builds over time.</p>
           </div>
         )}
 

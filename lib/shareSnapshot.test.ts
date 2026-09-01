@@ -37,7 +37,7 @@ describe('buildShareSnapshotState', () => {
     const state = buildShareSnapshotState({
       project,
       viewport: { latitude: 25, longitude: 85, zoom: 5 },
-      events: [{ id: 'e1', title: 'Clash', severity: 'high', lat: 1, lon: 2, country: 'IN', source: 'gdelt', timestamp: '', summary: '', category: 'conflict', countryCode: 'IN' }],
+      events: [{ id: 'e1', title: 'Clash', severity: 'high', lat: 1, lon: 2, country: 'IN', source: 'gdelt', timestamp: '', summary: '', category: 'conflict', countryCode: 'IN', url: '' }],
       alerts: [],
       plots: [],
     })

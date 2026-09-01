@@ -8,7 +8,7 @@ const ev = (title: string, over: Partial<IntelEvent> = {}): IntelEvent => ({
   title, summary: '', category: 'political', severity: 'medium',
   country: 'Israel', countryCode: 'IL', lat: 31.5, lon: 34.8,
   source: 'analyst', timestamp: new Date().toISOString(),
-  tags: ['aimed-pull'], ...over,
+  url: 'https://example.com/1', tags: ['aimed-pull'], ...over,
 })
 
 const match = (event: IntelEvent, score = 30): TopicMatch => ({

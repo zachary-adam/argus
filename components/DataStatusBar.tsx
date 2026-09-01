@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
-import type { StatusResponse, SourceEntry } from '@/app/api/status/route'
+import type { SourceEntry } from '@/app/api/status/route'
+import { useStatus } from '@/lib/hooks/useStatus'
 
 function dotStatus(ok: boolean, keyRequired: boolean, hasKey?: boolean, pending?: boolean) {
   if (keyRequired && !hasKey) return { className: 'ui-data-status-dot--muted', title: 'No API key configured' }
@@ -18,15 +19,8 @@ function age(fetchedAt: string | null): string {
 }
 
 export function DataStatusBar() {
-  const [status, setStatus] = useState<StatusResponse | null>(null)
-  const [open, setOpen]     = useState(false)
-
-  useEffect(() => {
-    const load = () => fetch('/api/status').then(r => r.json()).then(setStatus).catch(() => {})
-    load()
-    const t = setInterval(load, 60_000)
-    return () => clearInterval(t)
-  }, [])
+  const status = useStatus({ poll: true })
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     if (!open) return

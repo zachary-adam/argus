@@ -51,7 +51,7 @@ describe('eventPapers', () => {
     const project = {
       journal: [],
       eventPaperLinks: [createEventPaperLink('ev1', 'p1', 'Mark', 'explains')],
-    } as Project
+    } as unknown as Project
     expect(resolveEventTitle('ev1', project, [live])).toBe('Live feed headline')
   })
 

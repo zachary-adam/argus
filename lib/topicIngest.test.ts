@@ -15,7 +15,7 @@ describe('topicIngest', () => {
   })
 
   it('classifies firehose by default', () => {
-    expect(topicSourceBucket({ source: 'gdelt', tags: [] } as IntelEvent)).toBe('firehose')
+    expect(topicSourceBucket({ source: 'gdelt', tags: [] } as unknown as IntelEvent)).toBe('firehose')
   })
 
   it('counts buckets', () => {

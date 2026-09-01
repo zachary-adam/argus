@@ -11,7 +11,7 @@ const targeting = {
 const ev = (over: Partial<IntelEvent>): IntelEvent => ({
   id: '1', title: '', summary: '', category: 'political', severity: 'medium',
   country: 'Israel', countryCode: 'IL', lat: 31.5, lon: 34.8, source: 'analyst',
-  timestamp: new Date().toISOString(), tags: ['aimed-pull'], ...over,
+  timestamp: new Date().toISOString(), url: 'https://example.com/1', tags: ['aimed-pull'], ...over,
 })
 
 describe('isAimedEventRelevant', () => {

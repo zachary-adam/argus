@@ -5,7 +5,7 @@ import { useMapStore } from '@/stores/mapStore'
 import type { PredictionEntry } from '@/types/project'
 import {
   ChevronLeft, CheckCircle, XCircle, MinusCircle, ChevronDown, ChevronUp,
-  Trash2, ClipboardList, Download, LayoutGrid,
+  Trash2, ClipboardList, Download, LayoutGrid, Plus,
 } from 'lucide-react'
 import { useClosePanel } from '@/lib/hooks/useClosePanel'
 
@@ -83,12 +83,39 @@ export default function LedgerPanel() {
   const project = useProjectStore(s => s.getActiveProject())
   const validatePrediction = useProjectStore(s => s.validatePrediction)
   const removePrediction = useProjectStore(s => s.removePrediction)
+  const addPrediction = useProjectStore(s => s.addPrediction)
 
   const [expanded, setExpanded] = useState<string | null>(null)
   const [filterFormula, setFilterFormula] = useState<string>('all')
   const [filterStatus, setFilterStatus] = useState<'all' | 'pending' | 'validated'>('all')
   const [filterType, setFilterType] = useState<'all' | 'formula' | 'ach'>('all')
   const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({})
+
+  // Inline "log a prediction" form — lets the ledger be used directly, without
+  // first building a formula or ACH card on the canvas.
+  const [adding, setAdding] = useState(false)
+  const [draftStatement, setDraftStatement] = useState('')
+  const [draftConfidence, setDraftConfidence] = useState(50)
+  const [draftNote, setDraftNote] = useState('')
+
+  const addManualPrediction = () => {
+    if (!project || !draftStatement.trim()) return
+    addPrediction(project.id, {
+      id: `manual_${Date.now()}_${Math.round(Math.random() * 1e6)}`,
+      projectId: project.id,
+      formulaId: 'manual',
+      formulaName: draftStatement.trim(),
+      timestamp: new Date().toISOString(),
+      inputs: {},
+      weights: {},
+      output: draftConfidence,
+      outputLabel: 'Prediction',
+      narrative: draftNote.trim(),
+      entryType: 'manual',
+    })
+    setDraftStatement(''); setDraftConfidence(50); setDraftNote(''); setAdding(false)
+    setFilterStatus('all')
+  }
 
   const ledger = project?.predictionLedger ?? []
   const pending = useMemo(() => ledger.filter(e => !e.validatedOutcome), [ledger])
@@ -147,6 +174,15 @@ export default function LedgerPanel() {
           <span className="ui-chip ui-chip--xs" style={{ marginLeft: 4 }}>{project.name}</span>
         )}
         <div style={{ flex: 1 }} />
+        <button
+          type="button"
+          className="ui-btn ui-btn--primary"
+          style={{ fontSize: 10, padding: '4px 9px' }}
+          onClick={() => setAdding(a => !a)}
+          title="Log a prediction to track"
+        >
+          <Plus size={11} /> Add prediction
+        </button>
         {ledger.length > 0 && (
           <button
             type="button"
@@ -171,13 +207,69 @@ export default function LedgerPanel() {
       </header>
 
       <p className="ui-feed-hint ui-ledger-hint">
-        Formula and ACH scores from the canvas land here for validation.
-        Dated probability calls live in{' '}
+        Your prediction scorecard. Log a call, then mark it correct or wrong once
+        you know what happened — the ledger tracks how often you&rsquo;re right. Scores
+        from Canvas formulas and ACH cards land here too. For dated probability bets
+        (&ldquo;70% by Nov 30&rdquo;), use{' '}
         <button type="button" className="ui-link" onClick={() => togglePanel('forecasts')}>
           Forecasts
         </button>
         .
       </p>
+
+      {adding && (
+        <div className="ui-ledger-add">
+          <label className="ui-section-label" style={{ marginBottom: 4 }}>What are you predicting?</label>
+          <input
+            className="ui-input"
+            autoFocus
+            placeholder="e.g. IMF suspends the program before the next review"
+            value={draftStatement}
+            onChange={e => setDraftStatement(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') addManualPrediction() }}
+            style={{ marginBottom: 8 }}
+          />
+          <label className="ui-section-label" style={{ marginBottom: 4 }}>
+            How confident are you? <strong style={{ color: 'var(--text-primary)' }}>{draftConfidence}%</strong>
+          </label>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={5}
+            value={draftConfidence}
+            onChange={e => setDraftConfidence(Number(e.target.value))}
+            style={{ width: '100%', marginBottom: 8 }}
+          />
+          <textarea
+            className="ui-input"
+            rows={2}
+            placeholder="Why? (optional)"
+            value={draftNote}
+            onChange={e => setDraftNote(e.target.value)}
+            style={{ marginBottom: 8 }}
+          />
+          <div style={{ display: 'flex', gap: 6 }}>
+            <button
+              type="button"
+              className="ui-btn ui-btn--primary"
+              style={{ fontSize: 11 }}
+              disabled={!draftStatement.trim()}
+              onClick={addManualPrediction}
+            >
+              Log prediction
+            </button>
+            <button
+              type="button"
+              className="ui-btn ui-btn--ghost"
+              style={{ fontSize: 11 }}
+              onClick={() => { setAdding(false); setDraftStatement(''); setDraftNote('') }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       {pending.length > 0 && (
         <div className="ui-ledger-pending">
@@ -251,23 +343,30 @@ export default function LedgerPanel() {
         </div>
       )}
 
-      {ledger.length === 0 && (
+      {ledger.length === 0 && !adding && (
         <div className="ui-panel-empty ui-ledger-empty">
           <ClipboardList size={32} className="ui-panel-empty__icon" />
-          <div className="ui-panel-empty__title">No predictions recorded</div>
-          <ol className="ui-ledger-empty__steps">
-            <li>Open the canvas and add a formula or ACH card</li>
-            <li>Link events (formulas auto-score; ACH needs a judgment)</li>
-            <li>Come back here to validate outcomes over time</li>
-          </ol>
+          <div className="ui-panel-empty__title">Track your first prediction</div>
+          <p className="ui-feed-hint" style={{ maxWidth: 340, margin: '4px auto 0', lineHeight: 1.5 }}>
+            Write down a call you&rsquo;re making about this region — say, whether a crisis
+            deepens or an election stays peaceful. Later, mark it correct or wrong, and
+            the ledger shows your track record over time.
+          </p>
           <button
             type="button"
             className="ui-btn ui-btn--primary"
             style={{ marginTop: 14, fontSize: 12 }}
-            onClick={() => useMapStore.getState().focusWorkbench('canvas')}
+            onClick={() => setAdding(true)}
           >
-            Open canvas
+            <Plus size={13} /> Add a prediction
           </button>
+          <p className="ui-feed-hint" style={{ marginTop: 12, fontSize: 10 }}>
+            Or build a scored{' '}
+            <button type="button" className="ui-link" onClick={() => useMapStore.getState().focusWorkbench('canvas')}>
+              formula or ACH card on the Canvas
+            </button>{' '}
+            — those land here automatically.
+          </p>
         </div>
       )}
 
@@ -286,11 +385,12 @@ export default function LedgerPanel() {
         </div>
       )}
 
-      <div className="ui-panel-body" style={{ flex: 1, padding: 0 }}>
+      <div className="ui-panel-body" style={{ flex: filtered.length > 0 ? 1 : 0, padding: 0 }}>
         {filtered.map(entry => {
           const isOpen = expanded === entry.id
           const outcome = entry.validatedOutcome
           const isACH = entry.entryType === 'ach'
+          const isManual = entry.entryType === 'manual'
           const color = isACH ? achColor(entry.achConfidence) : scoreColor(entry.output)
           const date = new Date(entry.timestamp).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
@@ -321,8 +421,8 @@ export default function LedgerPanel() {
                     {entryTitle(entry)}
                   </div>
                   <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
-                    {isACH ? 'ACH lead hypothesis' : entry.outputLabel} · {date}
-                    {isACH ? '' : ` · ${entry.formulaName}`}
+                    {isACH ? 'ACH lead hypothesis' : isManual ? 'Prediction' : entry.outputLabel} · {date}
+                    {isACH || isManual ? '' : ` · ${entry.formulaName}`}
                   </div>
                   {entry.narrative && (
                     <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '90%', fontStyle: 'italic' }}>
@@ -390,7 +490,7 @@ export default function LedgerPanel() {
                     </div>
                   )}
 
-                  {!isACH && (
+                  {!isACH && !isManual && Object.keys(entry.inputs).length > 0 && (
                     <div style={{ marginTop: 12, marginBottom: 10 }}>
                       <div className="ui-section-label">Variable inputs</div>
                       {Object.entries(entry.inputs).map(([key, val]) => (

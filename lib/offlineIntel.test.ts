@@ -20,7 +20,7 @@ const mkEvent = (overrides: Partial<IntelEvent> & { id: string; title: string })
   timestamp: overrides.timestamp ?? new Date().toISOString(),
   lat: overrides.lat ?? 34,
   lon: overrides.lon ?? 78,
-  source: overrides.source ?? 'test',
+  source: overrides.source ?? 'gdelt',
   url: overrides.url ?? 'https://example.com',
 })
 

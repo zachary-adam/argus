@@ -45,8 +45,8 @@ Cloud operators: run all SQL in [`supabase/MIGRATIONS.md`](supabase/MIGRATIONS.m
 ### Install & run
 
 ```bash
-git clone https://github.com/zachary-adam/argus.git
-cd argus
+git clone https://github.com/zachary-adam/Argus-OSINT.git
+cd Argus-OSINT
 npm install
 cp .env.example .env.local
 # Map works with zero keys. Optionally add Mapbox / AI / Serper later.

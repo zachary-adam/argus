@@ -20,6 +20,7 @@ const ev = (over: Partial<IntelEvent>): IntelEvent => ({
   lon: anchor.lon,
   source: 'analyst',
   timestamp: new Date().toISOString(),
+  url: 'https://example.com/1',
   tags: ['aimed-pull', 'google-news'],
   ...over,
 })

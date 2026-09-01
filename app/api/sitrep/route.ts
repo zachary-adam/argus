@@ -7,7 +7,7 @@ import { logAiUsage } from '@/lib/logAiUsage'
 import { getRequestUserId } from '@/lib/auth/getRequestUser'
 import { listPlots } from '@/lib/plotStore'
 import { generateSitrepOffline } from '@/lib/offlineIntel'
-import { AI_KEYS_MISSING_BODY, planAiFromRequestWithProvider } from '@/lib/aiMode'
+import { planAiFromRequestWithProvider } from '@/lib/aiMode'
 import { runStreamCompletion } from '@/lib/aiComplete'
 
 function dtg(): string {
@@ -43,7 +43,9 @@ export async function GET(req: NextRequest) {
 7-DAY CRITICAL EVENTS: ${critByDay.map((c,i) => `D-${i}:${c}`).join(', ')}`
   })()
 
-  if (plan.useOffline) {
+  // Rules mode, or AI mode with no usable key: generate the sitrep offline
+  // instead of erroring.
+  if (plan.useOffline || plan.missingKeys || !plan.key) {
     const markdown = generateSitrepOffline({ focus, events, trendCtx })
     return new Response(markdown, {
       headers: {
@@ -53,14 +55,8 @@ export async function GET(req: NextRequest) {
       },
     })
   }
-  if (plan.missingKeys) {
-    return new Response(JSON.stringify(AI_KEYS_MISSING_BODY), { status: 400 })
-  }
 
   const key = plan.key
-  if (!key) {
-    return new Response(JSON.stringify(AI_KEYS_MISSING_BODY), { status: 400 })
-  }
 
   // Load analyst plots from DB — only those flagged for AI inclusion.
   // In cloud mode the user must be authenticated; otherwise the listed set is empty.

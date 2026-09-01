@@ -34,7 +34,7 @@ function ZBar({ z, color }: { z: number; color: string }) {
 
 export default function AnomalyPanel() {
   const { handleClose, closing } = useClosePanel('anomaly')
-  const { flyTo } = useMapStore()
+  const flyTo = useMapStore(s => s.flyTo)
   const events = useMapStore(s => s.events)
   const [scope, setScope] = useState<'global' | 'project'>('global')
 

@@ -213,7 +213,7 @@ describe('eventRetention', () => {
           flagged: false,
         },
       ],
-    } as Project
+    } as unknown as Project
     const repaired = repairProjectEventRetention(p)!
     const journal = repaired.find(e => e.id === 'j-ev')!
     const aimed = repaired.find(e => e.id === 'old-aimed')!
@@ -252,7 +252,7 @@ describe('eventRetention', () => {
         tags: ['aimed-pull', 'saved', 'retention-forever'],
         flagged: false,
       }],
-    } as Project
+    } as unknown as Project
     expect(repairProjectEventRetention(p)).toBeNull()
   })
 

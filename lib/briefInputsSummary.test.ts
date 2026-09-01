@@ -27,7 +27,7 @@ describe('briefInputsSummary', () => {
       eventPaperLinks: [{ id: 'l1' }, { id: 'l2' }],
       journal: [],
       cases: [],
-    } as Project)
+    } as unknown as Project)
     expect(line).toContain('2 paper links')
   })
 

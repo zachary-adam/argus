@@ -6,7 +6,7 @@ import { logAiUsage } from '@/lib/logAiUsage'
 import { getRequestUserId } from '@/lib/auth/getRequestUser'
 import { ARGUS_INTEL_SYSTEM } from '@/lib/workspaceIntel'
 import { nlqOffline, prefilterNlqCandidates } from '@/lib/offlineIntel'
-import { AI_KEYS_MISSING_BODY, planAiFromRequestWithProvider } from '@/lib/aiMode'
+import { planAiFromRequestWithProvider } from '@/lib/aiMode'
 import { parseModelJson } from '@/lib/parseModelJson'
 import { runCompletion } from '@/lib/aiComplete'
 
@@ -69,11 +69,9 @@ export async function POST(req: NextRequest) {
   const { resolveMaxTokens } = await import('@/lib/aiConfig')
   const plan = planAiFromRequestWithProvider(req, clientKey?.trim(), vaultGet, 'claude')
 
-  if (plan.useOffline) {
+  // Rules mode, or AI mode with no key: answer offline instead of erroring.
+  if (plan.useOffline || plan.missingKeys) {
     return NextResponse.json<NlqResponse>({ ...nlqOffline(query, events), offline: true })
-  }
-  if (plan.missingKeys) {
-    return NextResponse.json(AI_KEYS_MISSING_BODY, { status: 400 })
   }
 
   const ranked = prefilterNlqCandidates(query, events)

@@ -27,6 +27,7 @@ function ev(id: string, extra: Partial<UniversalEvent> = {}): UniversalEvent {
       text: 'comment',
       author: 'a',
       createdAt: new Date().toISOString(),
+      timestamp: new Date().toISOString(),
     })),
     rawSource: 'gdelt',
     projectId: 'p1',

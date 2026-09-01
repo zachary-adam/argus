@@ -544,6 +544,13 @@ export function IntelSourcePanel({ onClose }: { onClose: () => void }) {
   async function extractArticle() {
     setArticleLoading(true); setArticleError(''); setArticleEvents([]); setArticleAdded(0)
     try {
+      // Pasted-text extraction has no offline fallback (unlike URL scrape, which
+      // degrades to a metadata scrape). Say so plainly instead of firing a call
+      // that 400s and surfaces a raw error object.
+      if (!(await hasAiKey())) {
+        setArticleError('Auto-extracting events from pasted text needs an AI key. Add one in Settings → App, or paste a URL instead (that works without a key).')
+        return
+      }
       const engine = loadAnalysisEngine(project?.aiMode)
       const res = await fetch('/api/connectors/ai-extract', {
         method: 'POST',

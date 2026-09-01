@@ -1,6 +1,7 @@
 'use client'
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { useMapStore } from '@/stores/mapStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useProjectStore } from '@/stores/projectStore'
 import { SituationCase, CaseStatus } from '@/types/project'
 import { X, Plus, Trash2, FileText, Clock, FolderSearch, BarChart2 } from 'lucide-react'
@@ -25,7 +26,9 @@ const BLANK: NewCaseForm = { name: '', researchQuestion: '', description: '', st
 
 export default function CaseTrackerPanel() {
   const { handleClose, closing } = useClosePanel('cases')
-  const { events, setSelectedEvent, togglePanel, pushToast } = useMapStore()
+  const { events, setSelectedEvent, togglePanel, pushToast } = useMapStore(useShallow(s => ({
+    events: s.events, setSelectedEvent: s.setSelectedEvent, togglePanel: s.togglePanel, pushToast: s.pushToast,
+  })))
   const { getActiveProject, createCase, updateCase, deleteCase, removeEventFromCase, addCanvasNode, addEvents } = useProjectStore()
   const project = getActiveProject()
   const onCanvasIds = useMemo(() => canvasEventIds(project), [project])

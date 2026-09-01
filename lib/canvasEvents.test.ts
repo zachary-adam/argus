@@ -5,7 +5,7 @@ import {
 } from './canvasEvents'
 import type { Project, SituationCase } from '@/types/project'
 
-const baseProject = (nodes: Project['analyticalCanvas']['nodes'] = [], cases: SituationCase[] = []): Project => ({
+const baseProject = (nodes: NonNullable<Project['analyticalCanvas']>['nodes'] = [], cases: SituationCase[] = []): Project => ({
   id: 'p1',
   name: 'Test',
   createdAt: '',
@@ -13,7 +13,7 @@ const baseProject = (nodes: Project['analyticalCanvas']['nodes'] = [], cases: Si
   events: [],
   cases,
   analyticalCanvas: { nodes, edges: [] },
-} as Project)
+} as unknown as Project)
 
 const sampleCase = (overrides?: Partial<SituationCase>): SituationCase => ({
   id: 'case1',

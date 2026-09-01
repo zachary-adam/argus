@@ -5235,6 +5235,19 @@ mark.ui-mark {
   overflow: hidden;
   background: var(--bg);
 }
+/* The ledger is a reading surface, not a wall-to-wall panel. Keep the toolbar
+   full-width, but cap the content to a comfortable centered column so entries,
+   stats, and the hint don't stretch across the full width of a wide screen. */
+.ui-ledger-hint,
+.ui-ledger-add,
+.ui-ledger-pending,
+.ui-ledger-stats,
+.ui-ledger-filters,
+.ui-ledger-root .ui-panel-body {
+  width: 100%;
+  max-width: 920px;
+  margin-inline: auto;
+}
 .ui-ledger-root.panel-closing {
   animation: fadeOut 150ms cubic-bezier(0.55, 0, 1, 1) forwards;
   pointer-events: none;
@@ -5270,6 +5283,11 @@ mark.ui-mark {
   color: var(--text-secondary);
   background: color-mix(in srgb, var(--accent) 6%, var(--surface));
   border-bottom: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+}
+.ui-ledger-add {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-elevated);
 }
 .ui-ledger-empty {
   flex: 1;

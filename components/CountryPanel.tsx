@@ -2,6 +2,7 @@
 import { useState, type CSSProperties } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useMapStore } from '@/stores/mapStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useProjectStore } from '@/stores/projectStore'
 import { usePlotsStore } from '@/stores/plotsStore'
 import { CountryProfile } from '@/types'
@@ -103,7 +104,12 @@ function CiteTags({ tags }: { tags?: string[] }) {
 
 export default function CountryPanel() {
   const { handleClose, closing } = useClosePanel('country')
-  const { selectedCountry, selectedCountryCode, flyTo, events, alerts, situations, flaggedAlerts, threatenedCableData, setHighlightedCableId, highlightedCableId, pushToast } = useMapStore()
+  const { selectedCountry, selectedCountryCode, flyTo, events, alerts, situations, flaggedAlerts, threatenedCableData, setHighlightedCableId, highlightedCableId, pushToast } = useMapStore(useShallow(s => ({
+    selectedCountry: s.selectedCountry, selectedCountryCode: s.selectedCountryCode, flyTo: s.flyTo,
+    events: s.events, alerts: s.alerts, situations: s.situations, flaggedAlerts: s.flaggedAlerts,
+    threatenedCableData: s.threatenedCableData, setHighlightedCableId: s.setHighlightedCableId,
+    highlightedCableId: s.highlightedCableId, pushToast: s.pushToast,
+  })))
   const project = useProjectStore(s => s.getActiveProject())
   const allPlots = usePlotsStore(s => s.plots)
   const [cablesExpanded, setCablesExpanded] = useState(false)

@@ -16,7 +16,7 @@ const project = (events: Project['events']): Project => ({
   connectors: [],
   createdAt: '',
   updatedAt: '',
-} as Project)
+} as unknown as Project)
 
 describe('persistIntelCoordUpdates', () => {
   it('writes lat/lon when coords moved', () => {
@@ -27,12 +27,12 @@ describe('persistIntelCoordUpdates', () => {
       severity: 7, timestamp: '', actors: [], sources: [], sourceCount: 1,
       corroborationCount: 1, confidence: 0.7, dataQualityScore: 0.7,
       reportedAt: '', analystComments: [], rawSource: 'gdelt', projectId: 'p1',
-      tags: ['aimed-pull', 'google-news'],
+      tags: ['aimed-pull', 'google-news'], locationPrecision: 'exact', flagged: false,
     }])
     const refined: IntelEvent[] = [{
       id: 'e1', title: 'Galwan clash', summary: '', category: 'conflict',
       severity: 'high', lat: 34.76, lon: 78.14, country: 'India', countryCode: 'IN',
-      source: 'analyst', timestamp: '', tags: ['aimed-pull', 'google-news'],
+      source: 'analyst', timestamp: '', url: '', tags: ['aimed-pull', 'google-news'],
     }]
     const n = persistIntelCoordUpdates(p, refined, (_pid, id, u) => {
       updates.push({ id, lat: u.lat!, lon: u.lon! })
@@ -49,10 +49,11 @@ describe('persistIntelCoordUpdates', () => {
       severity: 5, timestamp: '', actors: [], sources: [], sourceCount: 1,
       corroborationCount: 1, confidence: 0.7, dataQualityScore: 0.7,
       reportedAt: '', analystComments: [], rawSource: 'gdelt', projectId: 'p1',
+      locationPrecision: 'exact', flagged: false, tags: [],
     }])
     persistIntelCoordUpdates(p, [{
       id: 'e1', title: 'x', summary: '', category: 'political', severity: 'medium',
-      lat: 34.76, lon: 78.14, country: 'India', countryCode: 'IN', source: 'gdelt', timestamp: '',
+      lat: 34.76, lon: 78.14, country: 'India', countryCode: 'IN', source: 'gdelt', timestamp: '', url: '',
     }], () => { called = true })
     expect(called).toBe(false)
   })

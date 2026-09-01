@@ -39,6 +39,7 @@ import { saveBriefToHistory } from '@/lib/saveBriefHistory'
 import { formatBriefInputsLine } from '@/lib/briefInputsSummary'
 import { usePlotsStore } from '@/stores/plotsStore'
 import { collectCanvasPapers, journalEntryFromPaper, journalPapersForBrief, journalEntryToAchEvidence } from '@/lib/journal'
+import { useAiAvailable } from '@/lib/hooks/useStatus'
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 
@@ -152,7 +153,7 @@ export default function AnalystCanvas() {
   const [briefLoading, setBriefLoading] = useState(false)
   const [brief, setBrief] = useState<import('@/types/canvasBrief').CanvasBriefResponse | null>(null)
   const [analysisEngine, setAnalysisEngine] = useState<AnalysisEngine>('ai')
-  const [aiAvailable, setAiAvailable] = useState(true)
+  const aiAvailable = useAiAvailable()
   // Paper search
   const [showPaperSearch, setShowPaperSearch] = useState(false)
   const [paperQuery,   setPaperQuery]   = useState('')
@@ -213,9 +214,6 @@ export default function AnalystCanvas() {
     setAnalysisEngine(loadAnalysisEngine(project?.aiMode))
   }, [project?.id, project?.aiMode])
 
-  useEffect(() => {
-    fetch('/api/status').then(r => r.json()).then(d => setAiAvailable(!!d.aiAvailable)).catch(() => {})
-  }, [])
 
   const toCanvas = (vx: number, vy: number) => ({ x: (vx - pan.x) / zoom, y: (vy - pan.y) / zoom })
   const nodeW = (n: CanvasNode) => NODE_W[n.type] ?? 260
@@ -629,12 +627,7 @@ export default function AnalystCanvas() {
         })
         return
       }
-      const data = await res.json() as {
-        offline?: boolean
-        warning?: string
-        headline?: string
-        [key: string]: unknown
-      }
+      const data = await res.json() as import('@/types/canvasBrief').CanvasBriefResponse
       setBrief(data)
       if (data.offline || data.warning) {
         const rulesOnPurpose = analysisEngine === 'rules'
@@ -643,7 +636,7 @@ export default function AnalystCanvas() {
           body: rulesOnPurpose
             ? 'Analysis engine is set to Rules. Switch to AI in the canvas menu for a generative draft.'
             : (data.warning ?? 'AI unavailable - rules brief generated instead.'),
-          severity: 'low',
+          severity: 'info',
           type: 'system',
         })
       }
@@ -651,7 +644,7 @@ export default function AnalystCanvas() {
         type: 'canvas',
         title: `${project.name} canvas brief`,
         projectId: project.id,
-        brief: data as Record<string, unknown>,
+        brief: data as unknown as Record<string, unknown>,
       })
     } catch (err) {
       console.error('[canvas-brief]', err)
@@ -931,7 +924,7 @@ export default function AnalystCanvas() {
             <BookOpen size={12} />
             Ledger
             {(project?.predictionLedger ?? []).filter(e => !e.validatedOutcome).length > 0 && (
-              <span className="ui-chip ui-chip--xs" style={{ marginLeft: 2, minWidth: 16, justify: 'center' }}>
+              <span className="ui-chip ui-chip--xs" style={{ marginLeft: 2, minWidth: 16, textAlign: 'center' }}>
                 {(project?.predictionLedger ?? []).filter(e => !e.validatedOutcome).length}
               </span>
             )}
@@ -1339,6 +1332,13 @@ export default function AnalystCanvas() {
               style={{ top: addMenuRect.bottom + 8, left: addMenuRect.left }}
               onMouseDown={e => e.stopPropagation()}
             >
+              <button type="button" role="menuitem" className="ui-canvas-add-menu__item" onClick={() => { addACHNode(); setShowCanvasAdd(false) }}>
+                <span className="ui-canvas-add-menu__icon"><BarChart2 size={14} /></span>
+                <span className="ui-canvas-add-menu__copy">
+                  <span className="ui-canvas-add-menu__title">ACH matrix</span>
+                  <span className="ui-canvas-add-menu__hint">Weigh competing hypotheses</span>
+                </span>
+              </button>
               <button type="button" role="menuitem" className="ui-canvas-add-menu__item" onClick={() => { setShowEntityForm(true); setShowPaperSearch(false); setShowCanvasAdd(false) }}>
                 <span className="ui-canvas-add-menu__icon ui-canvas-add-menu__icon--entity"><Globe size={14} /></span>
                 <span className="ui-canvas-add-menu__copy">
@@ -1934,6 +1934,10 @@ function ACHCard({ node, events, mapEvents, allNodes, allEdges, dark, selected, 
   const { surface, border, txt, muted, accent } = canvasTokens(dark)
   const pushToast = useMapStore(s => s.pushToast)
   const project = useProjectStore(s => s.getActiveProject())
+  const aiAvailable = useAiAvailable()
+  // Truth-in-labeling: only claim "AI" when AI is both selected AND actually
+  // usable. With no key, scoring silently falls back to rules, so say "Rules".
+  const usingAi = analysisEngine === 'ai' && aiAvailable
 
   const [localScoring, setLocalScoring] = useState(false)
   const [hypothesesDirty, setHypothesesDirty] = useState(false)
@@ -2152,7 +2156,7 @@ function ACHCard({ node, events, mapEvents, allNodes, allEdges, dark, selected, 
           ACH — Competing Hypotheses
         </span>
         <span style={{ fontSize: 8, fontWeight: 700, color: muted, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-          {analysisEngine === 'ai' ? 'AI ✦' : 'Rules'}
+          {usingAi ? 'AI ✦' : 'Rules'}
         </span>
         {localScoring && <Loader size={10} color={accent} style={{ animation: 'spin 0.8s linear infinite', flexShrink: 0 }} />}
         {!localScoring && hasScores && hypothesesDirty && (
@@ -2165,6 +2169,15 @@ function ACHCard({ node, events, mapEvents, allNodes, allEdges, dark, selected, 
           </button>
         )}
       </div>
+
+      {/* Plain-language explainer — what ACH is, shown until the card has scores */}
+      {!hasScores && (
+        <div style={{ padding: '7px 10px', fontSize: 9, lineHeight: 1.5, color: muted, borderBottom: `1px solid ${border}`, background: dark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)' }}>
+          List the competing explanations, then link events as evidence. Scoring counts
+          what <strong style={{ color: txt }}>supports</strong> vs <strong style={{ color: txt }}>contradicts</strong> each one — the
+          hypothesis contradicted <em>least</em> is the strongest, not the one with the most support.
+        </div>
+      )}
 
       {/* Hypothesis inputs */}
       <div style={{ padding: '8px 10px 6px', borderBottom: `1px solid ${border}` }} onMouseDown={e => e.stopPropagation()}>

@@ -236,16 +236,13 @@ Return this exact JSON (every prose field must carry inline [E#] citations where
         send({ type: 'meta', country, countryCode, sourceCount: recentEvents.length, plotCount: plots.length })
 
         const plan = planAiFromRequestWithProvider(req, clientKey?.trim(), vaultGet, 'claude')
-        if (plan.useOffline) {
+        // Rules mode, or AI mode with no usable key: stream the template brief
+        // instead of an error event.
+        if (plan.useOffline || plan.missingKeys || !plan.key) {
           const template = generateCountryBriefTemplate({
             country, countryCode, recentEvents, projectGoal, researchQuestion,
           })
           send({ type: 'complete', data: { ...template, sources, mode: 'template', offline: true } })
-          controller.close()
-          return
-        }
-        if (plan.missingKeys) {
-          send({ type: 'error', message: AI_KEYS_MISSING_BODY.error })
           controller.close()
           return
         }

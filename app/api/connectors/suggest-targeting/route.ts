@@ -4,7 +4,7 @@ import { vaultGet } from '@/lib/vault'
 import { GOAL_TEMPLATES, normalizeGoalCategory, inferGoalCategoryFromContext } from '@/lib/goalTemplates'
 import { deriveCollectionLenses } from '@/lib/collectionLenses'
 import { suggestMissionOffline } from '@/lib/offlineIntel'
-import { AI_KEYS_MISSING_BODY, planAiFromRequestWithProvider } from '@/lib/aiMode'
+import { planAiFromRequestWithProvider } from '@/lib/aiMode'
 import { runCompletion } from '@/lib/aiComplete'
 import type { GoalCategory } from '@/types/project'
 
@@ -42,7 +42,11 @@ export async function POST(req: NextRequest) {
 
     const plan = planAiFromRequestWithProvider(req, body.apiKey?.trim(), vaultGet, 'openai')
 
-    if (plan.useOffline) {
+    // Targeting suggestion is auto-fired on project open and has a fully-functional
+    // offline fallback, so degrade to it when keys are absent rather than erroring
+    // with a 400 (which only surfaces as a spurious console error). The wizard warns
+    // about missing keys separately, so nothing is hidden from the user.
+    if (plan.useOffline || plan.missingKeys) {
       const offline = suggestMissionOffline({
         goalTemplateId: body.goalTemplateId ?? goalTpl?.category,
         regionName: safeRegion,
@@ -75,10 +79,6 @@ export async function POST(req: NextRequest) {
         offline: true,
       })
     }
-    if (plan.missingKeys) {
-      return NextResponse.json(AI_KEYS_MISSING_BODY, { status: 400 })
-    }
-
     const year = new Date().getFullYear()
     // runCompletion routes to Anthropic or OpenAI based on which key the plan
     // resolved — a direct OpenAI fetch here breaks whenever the vault's

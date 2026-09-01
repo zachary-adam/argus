@@ -27,6 +27,9 @@ const baseProject = (): Project => ({
   hypothesisLog: [],
   eventPaperLinks: [],
   deletedEventIds: [],
+  formulaWeightOverrides: {},
+  aiMode: 'none',
+  watchRules: [],
 })
 
 const plot = (id: string): Plot => ({

@@ -1,21 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { ArgusMark } from '@/components/ArgusMark'
+import { useStatus } from '@/lib/hooks/useStatus'
 
 export function AuthBrandAside() {
-  const [eventCount, setEventCount] = useState<number | null>(null)
-
-  useEffect(() => {
-    fetch('/api/status')
-      .then(r => r.ok ? r.json() : null)
-      .then((d: { sources?: { count: number }[] } | null) => {
-        if (!d?.sources) return
-        const total = d.sources.reduce((n, s) => n + (s.count || 0), 0)
-        if (total > 0) setEventCount(total)
-      })
-      .catch(() => {})
-  }, [])
+  const status = useStatus()
+  const total = status?.sources?.reduce((n, s) => n + (s.count || 0), 0) ?? 0
+  const eventCount = total > 0 ? total : null
 
   const liveLabel = eventCount
     ? `${eventCount.toLocaleString()} events indexed across live feeds`

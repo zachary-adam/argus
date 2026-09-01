@@ -4,7 +4,7 @@ import type { Project } from '@/types/project'
 
 describe('migrateInvestigationGraph', () => {
   it('strips empty legacy graph', () => {
-    const p = { id: 'p1', analyticalCanvas: { nodes: [], edges: [] } } as Project & {
+    const p = { id: 'p1', analyticalCanvas: { nodes: [], edges: [] } } as unknown as Project & {
       investigationGraph?: { nodes: []; edges: [] }
     }
     p.investigationGraph = { nodes: [], edges: [] }

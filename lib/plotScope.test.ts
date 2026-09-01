@@ -13,7 +13,7 @@ describe('isDemoEvent', () => {
 
 describe('tagDemoEvents', () => {
   it('tags and stamps demo metadata', () => {
-    const tagged = tagDemoEvents([{ id: 's1', source: 'gdelt', category: 'political', title: 'T', summary: '', lat: 0, lon: 0, country: '', countryCode: '', severity: 'low', timestamp: '' }])
+    const tagged = tagDemoEvents([{ id: 's1', source: 'gdelt', category: 'political', title: 'T', summary: '', lat: 0, lon: 0, country: '', countryCode: '', severity: 'low', timestamp: '', url: '' }])
     expect(tagged[0].tags).toContain('demo')
     expect(tagged[0].source_detail).toContain('DEMO')
   })

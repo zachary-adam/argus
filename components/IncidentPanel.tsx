@@ -1,6 +1,7 @@
 'use client'
 import { useState, useMemo } from 'react'
 import { useMapStore } from '@/stores/mapStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useProjectStore } from '@/stores/projectStore'
 import { Incident, IncidentStage } from '@/types/project'
 import { IntelEvent } from '@/types'
@@ -41,7 +42,9 @@ const BLANK_FORM: NewIncidentForm = {
 
 export default function IncidentPanel() {
   const { handleClose, closing } = useClosePanel('incidents')
-  const { togglePanel, events, selectedEvent, setNlqHighlights } = useMapStore()
+  const { togglePanel, events, selectedEvent, setNlqHighlights } = useMapStore(useShallow(s => ({
+    togglePanel: s.togglePanel, events: s.events, selectedEvent: s.selectedEvent, setNlqHighlights: s.setNlqHighlights,
+  })))
   const { getActiveProject, createIncident, setIncidentStage, addIncidentNote, deleteIncident } = useProjectStore()
   const project = getActiveProject()
 
