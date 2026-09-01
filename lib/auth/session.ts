@@ -11,8 +11,17 @@ const EXPIRY = '7d'
 
 function getSecret(): Uint8Array {
   const raw = process.env.ARGUS_SESSION_SECRET
-  if (!raw) throw new Error('ARGUS_SESSION_SECRET not set in .env.local')
-  return new TextEncoder().encode(raw.padEnd(32, '0').slice(0, 32))
+  if (raw) return new TextEncoder().encode(raw.padEnd(32, '0').slice(0, 32))
+  // No secret configured. When password protection is off (zero-config local
+  // mode, as the README promises), fall back to a deterministic dev secret so
+  // local sessions work without any env setup. When ARGUS_PASSWORD *is* set,
+  // refuse — a guessable fallback would defeat the password protection.
+  if (!process.env.ARGUS_PASSWORD) {
+    return new TextEncoder().encode('argus-local-dev-secret-do-not-use'.padEnd(32, '0').slice(0, 32))
+  }
+  throw new Error(
+    'ARGUS_SESSION_SECRET not set — required when ARGUS_PASSWORD is set. Generate one with: openssl rand -hex 32',
+  )
 }
 
 export interface SessionUser {

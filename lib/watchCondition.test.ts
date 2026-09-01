@@ -6,6 +6,7 @@ const base = (overrides: Partial<IntelEvent> = {}): IntelEvent => ({
   id: '1', title: 'Election rally in Lagos', summary: 'Opposition party gathers supporters',
   category: 'political', severity: 'medium', country: 'Nigeria', countryCode: 'NG',
   lat: 6.5, lon: 3.4, source: 'gdelt', timestamp: new Date().toISOString(),
+  url: 'https://example.com/1',
   ...overrides,
 })
 

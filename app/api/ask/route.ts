@@ -5,7 +5,7 @@ import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 import { vaultGet } from '@/lib/vault'
 import { logAiUsage } from '@/lib/logAiUsage'
 import { getRequestUserId } from '@/lib/auth/getRequestUser'
-import { AI_KEYS_MISSING_BODY, planAiFromRequestWithProvider } from '@/lib/aiMode'
+import { planAiFromRequestWithProvider } from '@/lib/aiMode'
 import { runCompletion } from '@/lib/aiComplete'
 
 interface IncidentSummary {
@@ -215,16 +215,11 @@ export async function POST(req: NextRequest) {
   const { resolveMaxTokens } = await import('@/lib/aiConfig')
   const plan = planAiFromRequestWithProvider(req, clientKey?.trim(), vaultGet, 'claude')
 
-  if (plan.useOffline) {
+  // Rules mode, or AI mode with no usable key: answer from the template engine
+  // instead of erroring.
+  if (plan.useOffline || plan.missingKeys || !plan.key) {
     const answer = templateAnswer(question, events, alerts, regionName)
     return NextResponse.json({ answer, mode: 'template', offline: true })
-  }
-  if (plan.missingKeys) {
-    return NextResponse.json(AI_KEYS_MISSING_BODY, { status: 400 })
-  }
-  if (!plan.key) {
-    const answer = templateAnswer(question, events, alerts, regionName)
-    return NextResponse.json({ answer, mode: 'template' })
   }
 
   try {

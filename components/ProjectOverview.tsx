@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useMapStore } from '@/stores/mapStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useProjectStore } from '@/stores/projectStore'
 import { GOAL_TEMPLATES } from '@/lib/goalTemplates'
 import { CATEGORY_COLORS } from '@/lib/constants'
@@ -31,7 +32,9 @@ const TMPL_ICON: Record<string, React.ReactNode> = {
 
 export default function ProjectOverview() {
   const { handleClose, closing } = useClosePanel('overview')
-  const { togglePanel, events, alerts } = useMapStore()
+  const { togglePanel, events, alerts } = useMapStore(useShallow(s => ({
+    togglePanel: s.togglePanel, events: s.events, alerts: s.alerts,
+  })))
   const { getActiveProject, updateConnector } = useProjectStore()
   const project = getActiveProject()
   const [mounted, setMounted] = useState(false)

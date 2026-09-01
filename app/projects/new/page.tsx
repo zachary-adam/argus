@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight, Check, Globe, MapPin, Search, X, ChevronDown, Ch
 import { REGION_OPTIONS, GROUP_ORDER, RegionOption, regionIdsToCountryCodes, getRegionCenter } from '@/lib/regions'
 import { deriveProfile } from '@/lib/deriveProfile'
 import { useIsMobile } from '@/lib/hooks/useIsMobile'
+import { useAiAvailable } from '@/lib/hooks/useStatus'
 import { loadAnalysisEngine, saveAnalysisEngine, type AnalysisEngine } from '@/lib/aiMode'
 import { buildAiFetchHeaders } from '@/lib/aiConfig'
 import { AnalysisEngineToggle } from '@/components/ui/AnalysisEngineToggle'
@@ -65,7 +66,7 @@ export default function NewProjectPage() {
   const [missionSuggested, setMissionSuggested] = useState(false)
   const [missionSuggestError, setMissionSuggestError] = useState('')
   const [missionEngine, setMissionEngine] = useState<AnalysisEngine>('ai')
-  const [aiAvailable, setAiAvailable] = useState(false)
+  const aiAvailable = useAiAvailable()
   const [locating, setLocating] = useState(false)
   const [placeResolved, setPlaceResolved] = useState<string | null>(null)
   const [autoCollect, setAutoCollect] = useState(true)
@@ -156,7 +157,6 @@ export default function NewProjectPage() {
 
   useEffect(() => {
     setMissionEngine(loadAnalysisEngine('cloud'))
-    fetch('/api/status').then(r => r.json()).then(d => setAiAvailable(!!d.aiAvailable)).catch(() => {})
   }, [])
 
   // Step 3: offer a one-click mission draft when region is set but the analyst
@@ -441,7 +441,7 @@ export default function NewProjectPage() {
                         </>
                       )}
                       {filteredMacros.length === 0 && filteredCountries.length === 0 && (
-                        <div style={{ padding: '20px', textAlign: 'center', fontSize: 12, color: 'var(--text-muted)' }}>No results for "{regionSearch}"</div>
+                        <div style={{ padding: '20px', textAlign: 'center', fontSize: 12, color: 'var(--text-muted)' }}>No results for &ldquo;{regionSearch}&rdquo;</div>
                       )}
                     </div>
                     {selectedIds.length > 0 && (
@@ -458,7 +458,7 @@ export default function NewProjectPage() {
 
               {selectedIds.length > 0 && (
                 <div className="ui-callout" style={{ marginTop: 8, fontSize: 10, color: 'var(--accent)' }}>
-                  <strong>{scopedCountryCodes.length} countries</strong> will be scoped: {scopedCountryCodes.slice(0, 12).join(', ')}{scopedCountryCodes.length > 12 ? ` +${scopedCountryCodes.length - 12} more` : ''}
+                  <strong>{scopedCountryCodes.length} {scopedCountryCodes.length === 1 ? 'country' : 'countries'}</strong> will be scoped: {scopedCountryCodes.slice(0, 12).join(', ')}{scopedCountryCodes.length > 12 ? ` +${scopedCountryCodes.length - 12} more` : ''}
                 </div>
               )}
 

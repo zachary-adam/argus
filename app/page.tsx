@@ -68,7 +68,9 @@ export default function Home() {
             analyticalCanvas: existing.analyticalCanvas,
             plots: existing.plots,
             incidents: existing.incidents,
-            predictionLedger: existing.predictionLedger,
+            // Preserve entries the user added; if their demo ledger is still
+            // empty, seed the worked example from the demo definition.
+            predictionLedger: existing.predictionLedger.length > 0 ? existing.predictionLedger : demo.predictionLedger,
           })
           changed = true
         }

@@ -3,7 +3,7 @@ import { vaultGet } from '@/lib/vault'
 import { ARGUS_INTEL_SYSTEM } from '@/lib/workspaceIntel'
 import type { ACHEventScore } from '@/types/project'
 import { scoreACHOffline } from '@/lib/offlineIntel'
-import { AI_KEYS_MISSING_BODY, planAiFromRequestWithProvider } from '@/lib/aiMode'
+import { planAiFromRequestWithProvider } from '@/lib/aiMode'
 import { parseModelJson } from '@/lib/parseModelJson'
 import { runCompletion } from '@/lib/aiComplete'
 
@@ -38,14 +38,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ scores: [] })
   }
 
-  if (plan.useOffline) {
+  // Rules mode, or AI mode with no key available: score offline instead of
+  // erroring. scoreACHOffline is a real fallback, so the canvas gets usable
+  // scores rather than an "AI scoring unavailable" toast.
+  if (plan.useOffline || plan.missingKeys || !plan.key) {
     return NextResponse.json<ACHScoreResponse>({
       scores: scoreACHOffline(hypotheses, events),
       offline: true,
     })
-  }
-  if (plan.missingKeys || !plan.key) {
-    return NextResponse.json(AI_KEYS_MISSING_BODY, { status: 400 })
   }
 
   const hypoLines = hypotheses.map((h, i) => `H${i + 1} [id:${h.id}]: ${h.text}`).join('\n')

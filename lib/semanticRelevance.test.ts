@@ -77,8 +77,8 @@ describe('hasMissionSignal', () => {
 describe('scoreEventsByKeyword', () => {
   it('ranks entity matches above bare keywords', () => {
     const { scored, mode } = scoreEventsByKeyword([
-      { id: 'a', title: 'India China trade deal signed', summary: '', category: 'economic', severity: 'low', lat: 0, lon: 0, country: 'India', countryCode: 'IN', source: 'rss', timestamp: '' },
-      { id: 'b', title: 'PLA patrol near Galwan valley', summary: '', category: 'military', severity: 'high', lat: 0, lon: 0, country: 'India', countryCode: 'IN', source: 'rss', timestamp: '' },
+      { id: 'a', title: 'India China trade deal signed', summary: '', category: 'economic', severity: 'low', lat: 0, lon: 0, country: 'India', countryCode: 'IN', source: 'rss', timestamp: '', url: '' },
+      { id: 'b', title: 'PLA patrol near Galwan valley', summary: '', category: 'conflict', severity: 'high', lat: 0, lon: 0, country: 'India', countryCode: 'IN', source: 'rss', timestamp: '', url: '' },
     ], {
       targeting: { scope: 'regional', keywords: ['border'], watchEntities: ['PLA'], placeName: 'Galwan' },
       countryCodes: ['IN', 'CN'],

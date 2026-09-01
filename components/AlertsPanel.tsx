@@ -1,5 +1,6 @@
 'use client'
 import { useMapStore } from '@/stores/mapStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useProjectStore } from '@/stores/projectStore'
 import { X, XCircle, Flag, AlertTriangle, ChevronDown, ChevronUp, CheckCircle, Crosshair, Settings, RotateCcw, ToggleLeft, ToggleRight, Play, Loader } from 'lucide-react'
 import { DEFAULT_CORRELATION_SETTINGS, CorrelationSettings } from '@/types'
@@ -47,7 +48,11 @@ function decodeEntities(s: string): string {
 
 export default function AlertsPanel() {
   const { handleClose, closing } = useClosePanel('alerts')
-  const { alerts, setAlerts, flyTo, dismissAlert, flaggedAlerts, flagAlert, escalateAlert, highlightedAlertId, setHighlightedAlertId } = useMapStore()
+  const { alerts, setAlerts, flyTo, dismissAlert, flaggedAlerts, flagAlert, escalateAlert, highlightedAlertId, setHighlightedAlertId } = useMapStore(useShallow(s => ({
+    alerts: s.alerts, setAlerts: s.setAlerts, flyTo: s.flyTo, dismissAlert: s.dismissAlert,
+    flaggedAlerts: s.flaggedAlerts, flagAlert: s.flagAlert, escalateAlert: s.escalateAlert,
+    highlightedAlertId: s.highlightedAlertId, setHighlightedAlertId: s.setHighlightedAlertId,
+  })))
   const { getActiveProject, updateCorrelationSignal, resetCorrelationSettings } = useProjectStore()
   const project = getActiveProject()
 

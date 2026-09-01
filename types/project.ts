@@ -255,8 +255,9 @@ export interface PredictionEntry {
   validatedAt?: string
   validatedOutcome?: 'correct' | 'incorrect' | 'partial'
   validationNote?: string
-  // ACH-specific (set when entryType === 'ach')
-  entryType?: 'formula' | 'ach'
+  // 'formula' = weighted scoring model, 'ach' = competing-hypotheses card,
+  // 'manual' = a plain call logged straight into the ledger (no canvas needed).
+  entryType?: 'formula' | 'ach' | 'manual'
   leadHypothesis?: string
   achConfidence?: 'high' | 'moderate' | 'low'
   achHypotheses?: Array<{ text: string; supports: number; contradicts: number; net: number }>

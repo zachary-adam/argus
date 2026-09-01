@@ -2510,7 +2510,7 @@ export default function ArgusMap() {
           {eventFilter !== 'all' && <span style={{ fontSize: 9, background: 'var(--accent-tint)', color: MAP_ACCENT, border: '1px solid var(--accent)', borderRadius: 'var(--radius-lg)', padding: '1px 6px' }}>{eventFilter}</span>}
           {severityFilter !== 'all' && <span style={{ fontSize: 9, background: '#F7E2E6', color: '#BE1E3A', border: '1px solid #FECACA', borderRadius: 'var(--radius-lg)', padding: '1px 6px' }}>{severityFilter}</span>}
           {dateFilter !== 'all' && <span style={{ fontSize: 9, background: '#E0EDE8', color: '#3D7C66', border: '1px solid #BBF7D0', borderRadius: 'var(--radius-lg)', padding: '1px 6px' }}>{dateFilter}</span>}
-          {searchQuery && <span style={{ fontSize: 9, background: '#FEFCE8', color: '#CA8A04', border: '1px solid #FDE68A', borderRadius: 'var(--radius-lg)', padding: '1px 6px' }}>"{searchQuery}"</span>}
+          {searchQuery && <span style={{ fontSize: 9, background: '#FEFCE8', color: '#CA8A04', border: '1px solid #FDE68A', borderRadius: 'var(--radius-lg)', padding: '1px 6px' }}>&ldquo;{searchQuery}&rdquo;</span>}
           <button
             onClick={clearEventFilters}
             style={{ marginLeft: 2, background: 'none', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1px 8px', cursor: 'pointer', fontSize: 9, color: 'var(--text-muted)', fontWeight: 700 }}

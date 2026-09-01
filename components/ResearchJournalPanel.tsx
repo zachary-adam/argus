@@ -1,6 +1,7 @@
 'use client'
 import { useMemo, useState, useRef, useCallback, useEffect } from 'react'
 import { useMapStore } from '@/stores/mapStore'
+import { useShallow } from 'zustand/react/shallow'
 import { useProjectStore } from '@/stores/projectStore'
 import { X, Trash2, ExternalLink, FileDown, Plus, Search, Sparkles, Loader2, GitBranch, MoreHorizontal, Rss, BookMarked, ChevronLeft, BarChart2 } from 'lucide-react'
 import { searchPapersFromApi } from '@/lib/fetchPapers'
@@ -52,7 +53,10 @@ const BRIEF_EVIDENCE_LABEL: Record<BriefEvidenceMode, string> = {
 
 export default function ResearchJournalPanel() {
   const focusWorkbench = useMapStore(s => s.focusWorkbench)
-  const { setSelectedEvent, pushToast, setAddSourceOpen, togglePanel, events: liveEvents, journalTab, openJournal } = useMapStore()
+  const { setSelectedEvent, pushToast, setAddSourceOpen, togglePanel, events: liveEvents, journalTab, openJournal } = useMapStore(useShallow(s => ({
+    setSelectedEvent: s.setSelectedEvent, pushToast: s.pushToast, setAddSourceOpen: s.setAddSourceOpen,
+    togglePanel: s.togglePanel, events: s.events, journalTab: s.journalTab, openJournal: s.openJournal,
+  })))
   const {
     addJournalEntry,
     updateJournalEntry,

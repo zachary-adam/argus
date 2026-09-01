@@ -280,8 +280,71 @@ export const DEMO_PROJECTS: Project[] = [
     goalCustomNotes: 'Primary focus: SBP FX reserve trajectory, IMF tranche conditions, PTI protest-driven governance disruption. Secondary: spillover security events from KP/Balochistan.',
     events: PAKISTAN_EVENTS,
     plots: [],
-    predictionLedger: [],
-    forecasts: [],
+    // Worked example so the Ledger opens with real entries instead of a blank
+    // "No predictions recorded" screen: one validated formula call, one ACH card,
+    // and one manually-logged call still awaiting its outcome.
+    predictionLedger: [
+      {
+        id: 'pred_demo_pk_1',
+        projectId: 'demo_proj_pakistan_001',
+        formulaId: 'currency-crisis-index',
+        formulaName: 'Currency Crisis Index',
+        timestamp: ago(30),
+        inputs: { reserve_cover: 0.85, spread_widening: 0.78, inflation: 0.72, political_risk: 0.90 },
+        weights: { reserve_cover: 0.30, spread_widening: 0.25, inflation: 0.20, political_risk: 0.25 },
+        output: 82,
+        outputLabel: 'Currency Crisis Risk',
+        narrative: 'Reserves under 2 months of import cover, spreads widening, PTI unrest building — the model flagged high crisis risk 30 days out.',
+        entryType: 'formula',
+        validatedAt: ago(2),
+        validatedOutcome: 'correct',
+        validationNote: 'Rupee hit a record 310/USD — the high-risk call was confirmed.',
+      },
+      {
+        id: 'pred_demo_pk_2',
+        projectId: 'demo_proj_pakistan_001',
+        formulaId: 'ach',
+        formulaName: 'ACH — IMF program outcome',
+        timestamp: ago(6),
+        inputs: {},
+        weights: {},
+        output: 0,
+        outputLabel: 'ACH',
+        narrative: 'Competing hypotheses on where the stalled IMF 3rd tranche lands.',
+        entryType: 'ach',
+        leadHypothesis: 'IMF suspends the program; Pakistan slides toward a disorderly default within 90 days',
+        achConfidence: 'moderate',
+        achHypotheses: [
+          { text: 'IMF suspends the program; disorderly default path within 90 days', supports: 4, contradicts: 1, net: 3 },
+          { text: 'Last-minute waiver keeps the program alive under tighter conditions', supports: 2, contradicts: 2, net: 0 },
+          { text: 'Gulf/China bilateral rollover bridges the gap; program frozen, no default', supports: 3, contradicts: 3, net: 0 },
+        ],
+      },
+      {
+        id: 'pred_demo_pk_3',
+        projectId: 'demo_proj_pakistan_001',
+        formulaId: 'manual',
+        formulaName: 'Nationwide strike spreads beyond Karachi within 2 weeks',
+        timestamp: ago(3),
+        inputs: {},
+        weights: {},
+        output: 60,
+        outputLabel: 'Prediction',
+        narrative: 'Opposition called a Saturday strike; fuel and flour protests already spreading to Lahore and Multan.',
+        entryType: 'manual',
+      },
+    ],
+    forecasts: [
+      {
+        id: 'fc_demo_pk_1',
+        statement: 'SBP gross FX reserves fall below $6B before the next IMF review',
+        probability: 0.65,
+        createdAt: ago(20),
+        dueDate: ago(-30), // ~30 days from now
+        basis: 'Reserves at $7.8B and falling; no tranche disbursement expected near-term.',
+        projectId: 'demo_proj_pakistan_001',
+      },
+    ],
     connectors: DEFAULT_CONNECTORS.map(c =>
       ['gdelt', 'rss', 'reliefweb'].includes(c.id)
         ? { ...c, enabled: true }

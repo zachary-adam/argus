@@ -236,6 +236,18 @@ function openExclusivePanel(panels: Panels, key: keyof Panels): Panels {
   return newPanels
 }
 
+// Fullscreen workbench views — they hide the map row, so only one may be open,
+// and opening anything that lives in the map row must close them (otherwise that
+// panel renders into a hidden container and is invisible — e.g. Forecasts opened
+// from inside the Ledger). Kept in sync with `fullscreenWorkbench` in the page.
+const FULLSCREEN_WORKBENCH: (keyof Panels)[] = ['canvas', 'ledger', 'menu']
+// Panels rendered inside the map row (right column + map-stage overlays). They
+// require the map row to be visible, so opening one closes the fullscreen views.
+const MAP_ROW_PANELS: (keyof Panels)[] = [
+  'eventFeed', 'actors', 'threads', 'monitor', 'journal',
+  'velocity', 'forecasts', 'anomaly', 'country', 'alerts', 'plotsPanel',
+]
+
 // Panels that are mutually exclusive — opening any one closes the others in the same group.
 const PANEL_EXCLUSIVE_GROUPS: (keyof Panels)[][] = [
   // Right-side column slot (map stays visible beside these)
@@ -311,6 +323,13 @@ export const useMapStore = create<MapStore>()(
           }
           break
         }
+      }
+      if ((FULLSCREEN_WORKBENCH as string[]).includes(key as string)) {
+        // Opening one fullscreen view closes the other two.
+        for (const p of FULLSCREEN_WORKBENCH) if (p !== key) newPanels[p] = false
+      } else if ((MAP_ROW_PANELS as string[]).includes(key as string)) {
+        // Opening a map-row panel needs the map row visible → close fullscreen views.
+        for (const p of FULLSCREEN_WORKBENCH) newPanels[p] = false
       }
     }
     return {

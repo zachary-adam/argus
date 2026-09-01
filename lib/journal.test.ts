@@ -81,7 +81,7 @@ describe('journal', () => {
       researchQuestion: 'Will border tensions escalate?',
       regionName: 'Ladakh',
       targeting: { scope: 'regional', keywords: ['border', 'military'], watchEntities: [] },
-    } as Project)
+    } as unknown as Project)
     expect(q).toContain('escalate')
     expect(q).toContain('Ladakh')
     expect(q).toContain('border')

@@ -16,7 +16,7 @@ const MAP_SEV: Record<string, string> = {
   critical: '#F0556A', high: '#F0954A', medium: '#E3C04A', low: '#5FB89A', info: '#8593A0',
 }
 
-interface SnapshotState extends ShareSnapshotState {}
+type SnapshotState = ShareSnapshotState
 interface Snapshot {
   id: string; title: string; description: string
   state: SnapshotState; created_at: string

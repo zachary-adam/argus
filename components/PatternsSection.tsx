@@ -30,7 +30,9 @@ type SourceTab = 'rules' | 'ai' | 'manual' | 'all'
 export default function PatternsSection() {
   const mapEvents = useMapStore(s => s.events)
   const alerts = useMapStore(s => s.alerts)
-  const { flyTo, setSelectedEvent, pushToast } = useMapStore()
+  const flyTo = useMapStore(s => s.flyTo)
+  const setSelectedEvent = useMapStore(s => s.setSelectedEvent)
+  const pushToast = useMapStore(s => s.pushToast)
   const project = useActiveProject()
   const updateProject = useProjectStore(s => s.updateProject)
   const patternsEnabled = useSettingsStore(s => s.patternsEnabled)

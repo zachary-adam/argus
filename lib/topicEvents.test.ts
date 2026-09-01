@@ -5,7 +5,7 @@ import type { IntelEvent } from '@/types'
 const ev = (overrides: Partial<IntelEvent>): IntelEvent => ({
   id: '1', title: 'Election rally', summary: 'Party holds event', category: 'political',
   severity: 'medium', country: 'Nigeria', countryCode: 'NG', lat: 0, lon: 0,
-  source: 'gdelt', timestamp: new Date().toISOString(), ...overrides,
+  source: 'gdelt', timestamp: new Date().toISOString(), url: 'https://example.com/1', ...overrides,
 })
 
 describe('topicMatchedEvents', () => {

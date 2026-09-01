@@ -11,6 +11,7 @@ import { usePlotsStore } from '@/stores/plotsStore'
 import { saveNlqToHistory, fetchNlqHistory } from '@/lib/saveNlqHistory'
 import { getNlqQueryCache, setNlqQueryCache } from '@/lib/nlqQueryCache'
 import type { NlqHistoryRecord } from '@/lib/nlqHistory'
+import { useAiAvailable } from '@/lib/hooks/useStatus'
 
 const EXAMPLES = [
   'Conflict events in Iran last 48h',
@@ -42,7 +43,7 @@ export default function MapQueryBar() {
   const [fromCache,    setFromCache]    = useState(false)
   const [offlineMode,  setOfflineMode]  = useState(false)
   const [analysisEngine, setAnalysisEngine] = useState<AnalysisEngine>('ai')
-  const [aiAvailable, setAiAvailable] = useState(true)
+  const aiAvailable = useAiAvailable()
   const [serverHistory, setServerHistory] = useState<NlqHistoryRecord[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -62,10 +63,6 @@ export default function MapQueryBar() {
   useEffect(() => {
     setAnalysisEngine(loadAnalysisEngine(project?.aiMode))
   }, [project?.id, project?.aiMode])
-
-  useEffect(() => {
-    fetch('/api/status').then(r => r.json()).then(d => setAiAvailable(!!d.aiAvailable)).catch(() => {})
-  }, [])
 
   const applyResult = useCallback((
     data: { matchingIds: string[]; summary: string; appliedFilters: string; flyTo: { lat: number; lon: number; zoom: number } | null; offline?: boolean },

@@ -1,20 +1,23 @@
 'use client'
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { useAuth } from '@/lib/auth/AuthContext'
 import { WorkspaceData } from '@/types'
 
 export function useWorkspace() {
   const { isAuthenticated } = useAuth()
-  const [workspace, setWorkspace] = useState<WorkspaceData | null>(null)
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  useEffect(() => {
-    if (!isAuthenticated) return
-    fetch('/api/workspace')
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d) setWorkspace(d as WorkspaceData) })
-      .catch(() => {})
-  }, [isAuthenticated])
+  // Shared query key → the three consumers (ArgusMap, PlotsPanel, useWorkspaceSync)
+  // dedupe to a single GET instead of each fetching /api/workspace on mount.
+  const { data: workspace = null } = useQuery({
+    queryKey: ['workspace'],
+    enabled: isAuthenticated,
+    queryFn: async (): Promise<WorkspaceData | null> => {
+      const r = await fetch('/api/workspace')
+      return r.ok ? (r.json() as Promise<WorkspaceData>) : null
+    },
+  })
 
   const saveWorkspace = useCallback(async (settings: Record<string, unknown>) => {
     if (!workspace?.id) return
